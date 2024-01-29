@@ -9,19 +9,23 @@
 /* Begin PBXBuildFile section */
 		92567D742B677455005943D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D732B677455005943D1 /* AppDelegate.swift */; };
 		92567D762B677455005943D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D752B677455005943D1 /* SceneDelegate.swift */; };
-		92567D782B677455005943D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D772B677455005943D1 /* ViewController.swift */; };
+		92567D782B677455005943D1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D772B677455005943D1 /* MainViewController.swift */; };
 		92567D7D2B677456005943D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92567D7C2B677456005943D1 /* Assets.xcassets */; };
 		92567D802B677456005943D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92567D7E2B677456005943D1 /* LaunchScreen.storyboard */; };
+		92567D882B677503005943D1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D872B677503005943D1 /* TabBarController.swift */; };
+		92567D8A2B677581005943D1 /* RandomPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D892B677581005943D1 /* RandomPhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		92567D702B677455005943D1 /* UnsplashClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92567D732B677455005943D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92567D752B677455005943D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		92567D772B677455005943D1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		92567D772B677455005943D1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		92567D7C2B677456005943D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92567D7F2B677456005943D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92567D812B677456005943D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92567D872B677503005943D1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		92567D892B677581005943D1 /* RandomPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +60,9 @@
 			children = (
 				92567D732B677455005943D1 /* AppDelegate.swift */,
 				92567D752B677455005943D1 /* SceneDelegate.swift */,
-				92567D772B677455005943D1 /* ViewController.swift */,
+				92567D872B677503005943D1 /* TabBarController.swift */,
+				92567D772B677455005943D1 /* MainViewController.swift */,
+				92567D892B677581005943D1 /* RandomPhotoViewController.swift */,
 				92567D7C2B677456005943D1 /* Assets.xcassets */,
 				92567D7E2B677456005943D1 /* LaunchScreen.storyboard */,
 				92567D812B677456005943D1 /* Info.plist */,
@@ -134,7 +140,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92567D782B677455005943D1 /* ViewController.swift in Sources */,
+				92567D782B677455005943D1 /* MainViewController.swift in Sources */,
+				92567D8A2B677581005943D1 /* RandomPhotoViewController.swift in Sources */,
+				92567D882B677503005943D1 /* TabBarController.swift in Sources */,
 				92567D742B677455005943D1 /* AppDelegate.swift in Sources */,
 				92567D762B677455005943D1 /* SceneDelegate.swift in Sources */,
 			);
