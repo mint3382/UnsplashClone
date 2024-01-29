@@ -14,6 +14,7 @@
 		92567D802B677456005943D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92567D7E2B677456005943D1 /* LaunchScreen.storyboard */; };
 		92567D882B677503005943D1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D872B677503005943D1 /* TabBarController.swift */; };
 		92567D8A2B677581005943D1 /* RandomPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D892B677581005943D1 /* RandomPhotoViewController.swift */; };
+		92567D9A2B67FB8B005943D1 /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D992B67FB8B005943D1 /* Decodable+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		92567D812B677456005943D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92567D872B677503005943D1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		92567D892B677581005943D1 /* RandomPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPhotoViewController.swift; sourceTree = "<group>"; };
+		92567D992B67FB8B005943D1 /* Decodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				92567D732B677455005943D1 /* AppDelegate.swift */,
 				92567D752B677455005943D1 /* SceneDelegate.swift */,
 				92567D8C2B67D90C005943D1 /* Application */,
+				92567D982B67FB7A005943D1 /* Extension */,
 				92567D8E2B67D935005943D1 /* Model */,
 				92567D8D2B67D923005943D1 /* View */,
 				92567D8B2B67D8EF005943D1 /* Controller */,
