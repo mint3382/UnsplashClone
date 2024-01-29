@@ -7,10 +7,16 @@
 
 import UIKit
 
+
 class MainViewController: UIViewController {
+    var imageCollectionView: UICollectionView? = nil
+    var dataSource: UICollectionViewDiffableDataSource<Section, Photo>? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.titleView = UIImageView(image: UIImage(named: "logo"))
         view.backgroundColor = .systemBackground
     }
+    
+    
 }
 
