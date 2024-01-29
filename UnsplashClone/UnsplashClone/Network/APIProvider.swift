@@ -8,10 +8,16 @@
 import Foundation
 
 struct APIProvider {
-    func configureRequest(url: URL, method: String = HTTPMethod.get.typeName) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = method
+    func fetchData<T: Decodable>(decodingType: T.Type, request: URLRequest) async throws -> T {
+        let (data, response) = try await URLSession.shared.data(for: request)
         
-        return request
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw NetworkError.invalidStatus
+        }
+        
+        let jsonData = try JSONDecoder().decode(decodingType, from: data)
+        
+        return jsonData
     }
 }

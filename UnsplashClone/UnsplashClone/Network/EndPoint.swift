@@ -37,4 +37,14 @@ struct EndPoint {
         
         return queries
     }
+    
+    func configureRequest(method: String = HTTPMethod.get.typeName) -> URLRequest? {
+        guard let url = url else {
+            return nil
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        
+        return request
+    }
 }
