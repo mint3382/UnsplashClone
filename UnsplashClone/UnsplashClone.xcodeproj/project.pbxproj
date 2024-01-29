@@ -14,8 +14,11 @@
 		92567D802B677456005943D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92567D7E2B677456005943D1 /* LaunchScreen.storyboard */; };
 		92567D882B677503005943D1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D872B677503005943D1 /* TabBarController.swift */; };
 		92567D8A2B677581005943D1 /* RandomPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D892B677581005943D1 /* RandomPhotoViewController.swift */; };
+		92567D922B67DB29005943D1 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D912B67DB29005943D1 /* Photo.swift */; };
+		92567D942B67F75F005943D1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D932B67F75F005943D1 /* User.swift */; };
 		92567D972B67F79A005943D1 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D962B67F79A005943D1 /* Section.swift */; };
 		92567D9A2B67FB8B005943D1 /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D992B67FB8B005943D1 /* Decodable+.swift */; };
+		92567DA32B680A8C005943D1 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DA22B680A8C005943D1 /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,7 @@
 		92567D932B67F75F005943D1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		92567D962B67F79A005943D1 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		92567D992B67FB8B005943D1 /* Decodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+.swift"; sourceTree = "<group>"; };
+		92567DA22B680A8C005943D1 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +68,8 @@
 		92567D722B677455005943D1 /* UnsplashClone */ = {
 			isa = PBXGroup;
 			children = (
-				92567D732B677455005943D1 /* AppDelegate.swift */,
-				92567D752B677455005943D1 /* SceneDelegate.swift */,
+				92567DA42B680AAB005943D1 /* Error */,
+				92567D9B2B67FC1E005943D1 /* Network */,
 				92567D8C2B67D90C005943D1 /* Application */,
 				92567D982B67FB7A005943D1 /* Extension */,
 				92567D8E2B67D935005943D1 /* Model */,
@@ -138,6 +142,14 @@
 				92567DA02B6801F3005943D1 /* HTTP.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		92567DA42B680AAB005943D1 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				92567DA22B680A8C005943D1 /* NetworkError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +229,7 @@
 				92567D882B677503005943D1 /* TabBarController.swift in Sources */,
 				92567D972B67F79A005943D1 /* Section.swift in Sources */,
 				92567D742B677455005943D1 /* AppDelegate.swift in Sources */,
+				92567DA32B680A8C005943D1 /* NetworkError.swift in Sources */,
 				92567D762B677455005943D1 /* SceneDelegate.swift in Sources */,
 				92567D9A2B67FB8B005943D1 /* Decodable+.swift in Sources */,
 			);
