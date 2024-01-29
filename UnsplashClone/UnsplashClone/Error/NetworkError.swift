@@ -5,4 +5,10 @@
 //  Created by minsong kim on 1/30/24.
 //
 
-import Foundation
+enum NetworkError: Error {
+    case dataTaskFail
+    case responseCasting
+    case invalidStatus
+    case noData
+    case invalidURL
+}
