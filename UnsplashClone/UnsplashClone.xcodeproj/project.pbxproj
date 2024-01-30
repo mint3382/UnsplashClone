@@ -22,7 +22,10 @@
 		92567DA12B6801F3005943D1 /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DA02B6801F3005943D1 /* HTTP.swift */; };
 		92567DA32B680A8C005943D1 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DA22B680A8C005943D1 /* NetworkError.swift */; };
 		92567DA62B680B4D005943D1 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DA52B680B4D005943D1 /* APIProvider.swift */; };
+		92567DA82B68136C005943D1 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DA72B68136C005943D1 /* PhotoCell.swift */; };
 		92567DAE2B689D62005943D1 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DAD2B689D62005943D1 /* URLs.swift */; };
+		92567DB02B68DED6005943D1 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DAF2B68DED6005943D1 /* BookmarkCell.swift */; };
+		92567DB32B68E083005943D1 /* ImageViewDownloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DB22B68E083005943D1 /* ImageViewDownloadable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +46,10 @@
 		92567DA02B6801F3005943D1 /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		92567DA22B680A8C005943D1 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		92567DA52B680B4D005943D1 /* APIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
+		92567DA72B68136C005943D1 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		92567DAD2B689D62005943D1 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
+		92567DAF2B68DED6005943D1 /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
+		92567DB22B68E083005943D1 /* ImageViewDownloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewDownloadable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,7 @@
 		92567D722B677455005943D1 /* UnsplashClone */ = {
 			isa = PBXGroup;
 			children = (
+				92567DB12B68E071005943D1 /* Protocol */,
 				92567D8C2B67D90C005943D1 /* Application */,
 				92567D8E2B67D935005943D1 /* Model */,
 				92567D8D2B67D923005943D1 /* View */,
@@ -112,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				92567D7E2B677456005943D1 /* LaunchScreen.storyboard */,
+				92567DA72B68136C005943D1 /* PhotoCell.swift */,
+				92567DAF2B68DED6005943D1 /* BookmarkCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,6 +168,14 @@
 				92567DA22B680A8C005943D1 /* NetworkError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		92567DB12B68E071005943D1 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				92567DB22B68E083005943D1 /* ImageViewDownloadable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,8 +248,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92567DA82B68136C005943D1 /* PhotoCell.swift in Sources */,
 				92567D922B67DB29005943D1 /* Photo.swift in Sources */,
 				92567D782B677455005943D1 /* MainViewController.swift in Sources */,
+				92567DB32B68E083005943D1 /* ImageViewDownloadable.swift in Sources */,
+				92567DB02B68DED6005943D1 /* BookmarkCell.swift in Sources */,
 				92567D9D2B67FC53005943D1 /* EndPoint.swift in Sources */,
 				92567D8A2B677581005943D1 /* RandomPhotoViewController.swift in Sources */,
 				92567D942B67F75F005943D1 /* User.swift in Sources */,
