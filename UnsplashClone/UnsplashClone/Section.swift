@@ -7,7 +7,12 @@
 
 import Foundation
 
-enum Section: CaseIterable {
-    case bookmark
-    case recentImage
+enum Section: Hashable {
+    case main
 }
+
+enum Item: Hashable {
+    case bookmark(PhotoElement)
+    case recentImage(PhotoElement)
+}
+
