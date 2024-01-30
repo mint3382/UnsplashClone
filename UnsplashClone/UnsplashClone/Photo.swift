@@ -7,12 +7,15 @@
 
 import Foundation
 
-struct Photo: Decodable, Hashable {
+typealias Photo = [PhotoElement]
+
+struct PhotoElement: Decodable, Hashable {
     let id: String
     let width: Int
     let height: Int
     let description: String?
     let altDescription: String
+    let urls: URLs
     let likedByUser: Bool
     let user: User
 
@@ -22,7 +25,9 @@ struct Photo: Decodable, Hashable {
         case height
         case description
         case altDescription = "alt_description"
+        case urls
         case likedByUser = "liked_by_user"
         case user
     }
 }
+
