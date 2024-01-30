@@ -8,7 +8,7 @@
 import Foundation
 
 struct EndPoint {
-    private let scheme: String = "http"
+    private let scheme: String = "https"
     private let host: String = "api.unsplash.com"
     private let path: String = "/photos"
     private let queries: [URLQueryItem]?
