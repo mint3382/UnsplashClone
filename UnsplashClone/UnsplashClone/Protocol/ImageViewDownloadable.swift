@@ -30,4 +30,22 @@ extension ImageViewDownloadable {
         }
         dataTask.resume()
     }
+    
+    func downloadImageToGallery(url: URL) {
+        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error as NSError? {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data,
+                  let image = UIImage(data: data) else {
+                print("download error: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            print("다운로드 완료")
+        }
+        dataTask.resume()
+    }
 }
