@@ -11,6 +11,7 @@ typealias Photo = [PhotoElement]
 
 struct PhotoElement: Decodable, Hashable {
     let id: String
+    let title: String
     let width: Int
     let height: Int
     let description: String?
@@ -21,6 +22,7 @@ struct PhotoElement: Decodable, Hashable {
 
     enum CodingKeys: String, CodingKey {
         case id
+        case title = "slug"
         case width
         case height
         case description
@@ -30,4 +32,3 @@ struct PhotoElement: Decodable, Hashable {
         case user
     }
 }
-
