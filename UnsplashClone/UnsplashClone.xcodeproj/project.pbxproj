@@ -26,6 +26,7 @@
 		92567DAE2B689D62005943D1 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DAD2B689D62005943D1 /* URLs.swift */; };
 		92567DB02B68DED6005943D1 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DAF2B68DED6005943D1 /* BookmarkCell.swift */; };
 		92567DB32B68E083005943D1 /* ImageViewDownloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DB22B68E083005943D1 /* ImageViewDownloadable.swift */; };
+		92567DC62B69C5DF005943D1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DC52B69C5DF005943D1 /* DetailViewController.swift */; };
 		92567DC82B6A4B9E005943D1 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DC72B6A4B9E005943D1 /* UIImage+.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		92567DAD2B689D62005943D1 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		92567DAF2B68DED6005943D1 /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		92567DB22B68E083005943D1 /* ImageViewDownloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewDownloadable.swift; sourceTree = "<group>"; };
+		92567DC52B69C5DF005943D1 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		92567DC72B6A4B9E005943D1 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 				92567D872B677503005943D1 /* TabBarController.swift */,
 				92567D772B677455005943D1 /* MainViewController.swift */,
 				92567D892B677581005943D1 /* RandomPhotoViewController.swift */,
+				92567DC52B69C5DF005943D1 /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				92567D942B67F75F005943D1 /* User.swift in Sources */,
 				92567D882B677503005943D1 /* TabBarController.swift in Sources */,
 				92567D972B67F79A005943D1 /* Section.swift in Sources */,
+				92567DC62B69C5DF005943D1 /* DetailViewController.swift in Sources */,
 				92567D742B677455005943D1 /* AppDelegate.swift in Sources */,
 				92567DA62B680B4D005943D1 /* APIProvider.swift in Sources */,
 				92567DAE2B689D62005943D1 /* URLs.swift in Sources */,
