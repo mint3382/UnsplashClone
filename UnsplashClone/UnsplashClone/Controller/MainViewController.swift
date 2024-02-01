@@ -9,32 +9,38 @@ import UIKit
 
 class MainViewController: UIViewController {
     private var photos: Photo?
-    var photoItems: [Item] = [] {
+    var photoItems: [Item] = [] 
+    {
         didSet {
             setSnapShot()
         }
     }
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
+    let pinterestLayout = PinterestFlowLayout()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.titleView = UIImageView(image: UIImage(named: "logo"))
         view.backgroundColor = .systemBackground
-        collectionView.delegate = self
+        let layout = PinterestFlowLayout()
+        layout.delegate = self
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         loadPhotos()
+        setDataSource()
         configureCollectionView()
     }
 }
 
 extension MainViewController: UICollectionViewDelegate {
     func configureCollectionView() {
+
         configureCollectionViewUI()
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        collectionView.delegate = self
+//        collectionView.dataSource = dataSource
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.id)
         collectionView.register(BookmarkCell.self, forCellWithReuseIdentifier: BookmarkCell.id)
-        setDataSource()
-        collectionView.setCollectionViewLayout(createLayout(), animated: true)
         setSnapShot()
     }
     
@@ -60,89 +66,25 @@ extension MainViewController: UICollectionViewDelegate {
     
     private func setSnapShot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        
+    
         snapshot.appendSections([Section.main])
         snapshot.appendItems(photoItems, toSection: Section.main)
         
-        dataSource?.apply(snapshot)
+        dataSource?.apply(snapshot, animatingDifferences: false)
     }
     
     func configureCollectionViewUI() {
         view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 8)
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
         ])
     }
-    
-    private func createLayout() -> UICollectionViewCompositionalLayout {
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 30
-        let conf = UICollectionLayoutWaterfallConfiguration { indexPath in
-            let item = self.photoItems[indexPath.item]
-//            let size: CGSize
-            switch item {
-            case .bookmark(let photo):
-                return photo.size
-            case .recentImage(let photo):
-                return photo.size
-            }
-            
-//            return CGSize(width: 0, height: 0)
-        }
-        
-        let layout = UICollectionViewCompositionalLayout.waterfall(configuration: conf)
-        
-        return layout
-        
-//        return UICollectionViewCompositionalLayout (sectionProvider: {[weak self] sectionIndex,a  in
-//            
-//            return self?.createPhotoSection()
-//        },configuration: config)
-    }
-    
-    private func createPhotoSection() -> NSCollectionLayoutSection {
-        //item
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(150), heightDimension: .absolute(300))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let itemSize2 = NSCollectionLayoutSize(widthDimension: .absolute(170), heightDimension: .absolute(200))
-        let item2 = NSCollectionLayoutItem(layoutSize: itemSize2)
-        
-        //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute((view.frame.width - 8) / 2), heightDimension: .estimated(300))
-//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 2)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item, item2])
-        group.interItemSpacing = .fixed(8)
-        
-        //section
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 8
-//        section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: -5, trailing: 10)
-        
-        return section
-    }
-    
-    private func createBookmarkSection() -> NSCollectionLayoutSection {
-        //item
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(view.frame.width / 2 - 8), heightDimension: .estimated(300))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .fixed(8)
-        
-        //section
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 8
-        section.orthogonalScrollingBehavior = .continuous
-        
-        return section
-    }
-    
+   
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("click")
         print(photoItems[indexPath.item])
@@ -159,9 +101,8 @@ extension MainViewController: UICollectionViewDelegate {
         case .recentImage(let photo):
             detailViewController = DetailViewController(item: photo, image: image)
         }
-//        detailViewController.modalPresentationStyle = .fullScreen
+        
         self.present(detailViewController, animated: true)
-//        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
     
@@ -177,10 +118,9 @@ extension MainViewController {
         Task {
             do {
                 let photo = try await apiProvider.fetchData(decodingType: Photo.self, request: request)
-                photo.forEach { photoElement in
-                    photoItems.append(Item.recentImage(photoElement))
+                photoItems = photo.map { photoElement in
+                    Item.recentImage(photoElement)
                 }
-                
                 //TODO: fetch해서 얻은 photos 넘겨주기
             } catch {
                 //TODO: 실패 알럿
@@ -190,147 +130,108 @@ extension MainViewController {
     }
 }
 
-
-class LayoutItemProvider {
-    private var columnHeights: [CGFloat]
-    private let columnCount: CGFloat
-    private let itemSizeProvider: UICollectionViewWaterfallLayoutItemSizeProvider
-//    private let itemSizeProvider: CGSize
-    private let spacing: CGFloat
-    private let contentSize: CGSize
-    
-    init(
-//        configuration: CGSize
-        configuration: UICollectionLayoutWaterfallConfiguration,
-        environment: NSCollectionLayoutEnvironment
-    ) {
-        self.columnHeights = [CGFloat](repeating: 0, count: configuration.columnCount)
-        self.columnCount = CGFloat(configuration.columnCount)
-        self.itemSizeProvider = configuration.itemSizeProvider
-        self.spacing = configuration.spacing
-        self.contentSize = environment.container.effectiveContentSize
-    }
-    
-    func item(for indexPath: IndexPath) -> NSCollectionLayoutGroupCustomItem {
-        let frame = frame(for: indexPath)
-        columnHeights[columnIndex()] = frame.maxY + spacing
-        return NSCollectionLayoutGroupCustomItem(frame: frame)
-    }
-    
-    private func frame(for indexPath: IndexPath) -> CGRect {
-        let size = itemSize(for: indexPath)
-        let origin = itemOrigin(width: size.width)
-        return CGRect(origin: origin, size: size)
-    }
-    
-    private func itemOrigin(width: CGFloat) -> CGPoint {
-        let y = columnHeights[columnIndex()].rounded()
-        let x = (width + spacing) * CGFloat(columnIndex())
-        return CGPoint(x: x, y: y)
-    }
-    
-    private func itemSize(for indexPath: IndexPath) -> CGSize {
-        let width = itemWidth()
-//        let width = CGFloat(300)
-        let height = itemHeight(for: indexPath, itemWidth: width)
-//        let height = CGFloat(Int.random(in: 150...400))
-        return CGSize(width: width, height: height)
-    }
-    
-    private func itemWidth() -> CGFloat {
-        let spacing = (columnCount - 1) * spacing
-//        return (contentSize.width - spacing) / columnCount
-        return (390 - spacing) / columnCount
-    }
-    
-    private func itemHeight(for indexPath: IndexPath, itemWidth: CGFloat) -> CGFloat {
-        let itemSize = itemSizeProvider(indexPath)
-        let aspectRatio = itemSize.height / itemSize.width
-        let itemHeight = itemWidth * aspectRatio
-        return itemHeight.rounded()
-    }
-    
-    private func columnIndex() -> Int {
-        columnHeights
-            .enumerated()
-            .min(by: { $0.element < $1.element })?
-            .offset ?? 0
+extension MainViewController: PinterestLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightIndexPath indexPath: IndexPath) -> CGFloat {
+        
+//        return CGFloat(imageRatio) * cellWidth
+        return CGFloat.random(in: 100...300)
     }
 }
 
-struct UICollectionLayoutWaterfallConfiguration {
-    var columnCount: Int
-    var spacing: CGFloat
-    var contentInsetsReference: UIContentInsetsReference
-//    var itemSizeProvider: CGSize
-    var itemSizeProvider: UICollectionViewWaterfallLayoutItemSizeProvider
+//동적인 높이가 필요할 때 정보를 제공하는 delegate
+protocol PinterestLayoutDelegate: AnyObject {
+    //사진의 높이를 요청하는 메소드
+    func collectionView(_ collectionView: UICollectionView, heightIndexPath indexPath: IndexPath) -> CGFloat
     
-    init(
-        columnCount: Int = 2,
-        spacing: CGFloat = 8,
-        contentInsetsReference: UIContentInsetsReference = .automatic,
-//        itemSizeProvider: CGSize
-        itemSizeProvider: @escaping UICollectionViewWaterfallLayoutItemSizeProvider
-    ) {
-        self.columnCount = columnCount
-        self.spacing = spacing
-        self.contentInsetsReference = contentInsetsReference
-        self.itemSizeProvider = itemSizeProvider
-    }
 }
 
-extension UICollectionViewCompositionalLayout {
+class PinterestFlowLayout: UICollectionViewFlowLayout {
+    weak var delegate: (PinterestLayoutDelegate)?
+    var numberOfColumns = 2
+    var cellPadding: CGFloat = 4
     
-    static func waterfall(
-        columnCount: Int = 2,
-        spacing: CGFloat = 8,
-        contentInsetsReference: UIContentInsetsReference = .automatic,
-//        itemSizeProvider: CGSize
-        itemSizeProvider: @escaping UICollectionViewWaterfallLayoutItemSizeProvider
-    ) -> UICollectionViewCompositionalLayout {
-        let configuration = UICollectionLayoutWaterfallConfiguration(
-            columnCount: columnCount,
-            spacing: spacing,
-            contentInsetsReference: contentInsetsReference,
-            itemSizeProvider: itemSizeProvider
-        )
-        return waterfall(configuration: configuration)
+    //계산한 속성들을 캐시. 매 시간 다시 연산하는 것이 아닌, 캐시에 요청하는 방식으로 사용.
+    var cache = [UICollectionViewLayoutAttributes]()
+    
+    //content Size를 저장하기 위한 속성들.
+    //contentHeight: 사진이 추가되면 증가
+    //contentWidth: collectionView의 넓이와 자체 contentInset 기반으로 계산
+    var contentHeight: CGFloat = 0
+    var contentWidth: CGFloat {
+        guard let collectionView = collectionView else {
+            return 0
+        }
+        let insets = collectionView.contentInset
+        return collectionView.bounds.width - (insets.left + insets.right)
     }
     
-    static func waterfall(configuration: UICollectionLayoutWaterfallConfiguration) -> UICollectionViewCompositionalLayout {
-        
-        var numberOfItems: (Int) -> Int = { _ in 0 }
-        
-        let layout = UICollectionViewCompositionalLayout { section, environment in
-            
-            let groupLayoutSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .estimated(environment.container.effectiveContentSize.height)
-//                heightDimension: .absolute(CGFloat(Int.random(in: 170...300)))
-            )
-            
-            let group = NSCollectionLayoutGroup.custom(layoutSize: groupLayoutSize) { environment in
-                let itemProvider = LayoutItemProvider(configuration: configuration, environment: environment)
-                var items = [NSCollectionLayoutGroupCustomItem]()
-                for i in 0..<numberOfItems(section) {
-                    let indexPath = IndexPath(item: i, section: section)
-                    let item = itemProvider.item(for: indexPath)
-                    items.append(item)
-                }
-                return items
-            }
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.contentInsetsReference = configuration.contentInsetsReference
-            return section
+    //collectionView의 contentSize를 반환하는 메서드 재정의
+    override var collectionViewContentSize: CGSize {
+        return CGSize(width: contentWidth, height: contentHeight)
+    }
+    
+    override func prepare() {
+        //cache가 비어있고 collectionView가 존재할때만 연산
+        guard cache.isEmpty,
+              let collectionView else {
+            return
         }
         
-        numberOfItems = { [weak layout] in
-            layout?.collectionView?.numberOfItems(inSection: $0) ?? 0
+        //열 넓이 기반 모든 column에 대해 x좌표와 함께 xOffset 배열 채움.
+        let columnWidth = contentWidth / CGFloat(numberOfColumns)
+        var xOffset = [CGFloat]() //cell의 x 위치를 나타내는 배열
+        for column in 0 ..< numberOfColumns {
+            xOffset.append(CGFloat(column) * columnWidth)
         }
         
-        return layout
+        //yOffset 배열은 모든 열에 대한 y위치 추적
+        //각 열의 첫번째 항목의 offset이기 때문에 배열 값들을 0으로 초기화
+        var column = 0 //현재 행의 위치
+        var yOffset = [CGFloat](repeating: 0, count: numberOfColumns) //cell의 y위치를 나타내는 배열
+        //단 하나의 섹션만 있는 레이아웃
+        //첫 번째 섹션의 모든 아이템 반복
+        for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
+            let indexPath = IndexPath(item: item, section: 0)
+            
+            //프레임 계산
+            let photoHeight = delegate?.collectionView(collectionView, heightIndexPath: indexPath) ?? 180
+            let height = cellPadding * 2 + (photoHeight)
+            
+            let frame = CGRect(x: xOffset[column], 
+                               y: yOffset[column], 
+                               width: columnWidth,
+                               height: height)
+            let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+            
+            //인스턴스 생성, frame 사용하여 자체 프레임 설정, 캐시에 추가
+            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+            attributes.frame = insetFrame
+            cache.append(attributes)
+            
+            //새로 계산된 항목의 프레임을 확장
+            contentHeight = max(contentHeight, frame.maxY)
+            yOffset[column] = yOffset[column] + height
+            
+            //다음 항목이 다음 열에 배치되도록
+            column = yOffset[0] > yOffset[1] ? 1 : 0
+        }
+    }
+    
+    //모든 셀과 보충 뷰의 레이아웃 정보 리턴
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+      
+      var visibleLayoutAttributes = [UICollectionViewLayoutAttributes]()
+      
+      for attributes in cache {
+        if attributes.frame.intersects(rect) {
+          visibleLayoutAttributes.append(attributes)
+        }
+      }
+      return visibleLayoutAttributes
+    }
+    
+    //모든 셀의 레이아웃 정보 리턴
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+      return cache[indexPath.item]
     }
 }
-
-typealias UICollectionViewWaterfallLayoutItemSizeProvider = (IndexPath) -> CGSize
