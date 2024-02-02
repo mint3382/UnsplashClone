@@ -39,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9233D6872B6C8737008514C7 /* DetailElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailElement.swift; sourceTree = "<group>"; };
 		9233D68A2B6C89AB008514C7 /* ModelData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelData.xcdatamodel; sourceTree = "<group>"; };
 		9233D69C2B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9233D69D2B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -298,6 +299,7 @@
 				9233D6A22B6C8E5F008514C7 /* UserMO+CoreDataClass.swift in Sources */,
 				92567DA32B680A8C005943D1 /* NetworkError.swift in Sources */,
 				92567D762B677455005943D1 /* SceneDelegate.swift in Sources */,
+				9233D6882B6C8737008514C7 /* DetailElement.swift in Sources */,
 				92567DC82B6A4B9E005943D1 /* UIImage+.swift in Sources */,
 				92567D9A2B67FB8B005943D1 /* Decodable+.swift in Sources */,
 				92567DCA2B6A5F1B005943D1 /* RandomPhotoCell.swift in Sources */,
