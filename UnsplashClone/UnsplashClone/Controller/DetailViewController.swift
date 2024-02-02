@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController, ImageViewDownloadable {
     static let identifier = "DetailViewController"
-    var item: PhotoElement
+    
+    var element: DetailElement
     var image: UIImage?
+    var container: NSPersistentContainer = (UIApplication.shared.delegate as! AppDelegate).container
     
     let totalStackView: UIStackView = {
         let stackView = UIStackView()
@@ -24,8 +27,6 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
     let informationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.distribution = .equalSpacing
         stackView.distribution = .fillEqually
         
         return stackView
@@ -35,7 +36,6 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
     let barStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fillProportionally
         stackView.spacing = 8
         
@@ -84,16 +84,9 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
     let bookmarkButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "bookmark")?.resize(targetSize: CGSize(width: 30, height: 30))
-        let action = UIAction { _ in
-            if button.layer.opacity == 0.1 {
-                button.layer.opacity = 0.7
-            } else {
-                button.layer.opacity = 0.1
-            }
-        }
         button.setImage(image, for: .normal)
         button.layer.opacity = 0.1
-        button.addAction(action, for: .touchUpInside)
+        button.addTarget(self, action: #selector(tappedBookmarkButton), for: .touchUpInside)
         
         return button
     }()
@@ -106,16 +99,26 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         return button
     }()
     
+    @objc func tappedBookmarkButton() {
+        if bookmarkButton.layer.opacity == 0.1 {
+            bookmarkButton.layer.opacity = 0.7
+            saveData()
+        } else {
+            bookmarkButton.layer.opacity = 0.1
+            deleteData(element)
+        }
+    }
+    
     @objc func tappedCloseButton() {
         self.dismiss(animated: true)
     }
     
     @objc func tappedDownloadButton() {
-        self.downloadImageToGallery(url: item.urls.regular)
+        self.downloadImageToGallery(url: URL(string: element.urls)!)
     }
     
     init(item: PhotoElement, image: UIImage) {
-        self.item = item
+        self.element = DetailElement(id: UUID(), title: item.title, width: item.width, height: item.height, descriptions: item.description, altDescription: item.altDescription, urls: item.urls.regular.absoluteString, likedByUser: item.likedByUser, user: item.user)
         self.image = image
         super.init(nibName: nil, bundle: nil)
     }
@@ -131,17 +134,15 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         view.isOpaque = false
         self.imageView.image = image!.resize(targetSize: CGSize(
             width: view.frame.width,
-            height: ((Double(item.height) / Double(item.width))) * view.frame.width
+            height: ((Double(element.height) / Double(element.width))) * view.frame.width
         ))
-//        configureLabel()
-//        configureImage()
         configureStackView()
     }
     
     func configureStackView() {
-        self.titleLabel.text = item.title
-        self.usernameLabel.text = item.user.username
-        self.descriptionLabel.text = item.description
+        self.titleLabel.text = element.title
+        self.usernameLabel.text = element.user.username
+        self.descriptionLabel.text = element.altDescription
         
         barStackView.addArrangedSubview(closeButton)
         barStackView.addArrangedSubview(usernameLabel)
@@ -158,7 +159,6 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         view.addSubview(totalStackView)
         
         NSLayoutConstraint.activate([
-//            usernameLabel.widthAnchor.constraint(equalToConstant: view.frame.width - 175),
             totalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             totalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             totalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
@@ -175,10 +175,6 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
             imageView.widthAnchor.constraint(equalToConstant: imageView.intrinsicContentSize.width),
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor)
-//            imageView.heightAnchor.constraint(lessThanOrEqualToConstant: imageView.intrinsicContentSize.height),
-//            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: CGFloat((item.height / item.width))),
-//            imageView.widthAnchor.constraint(equalToConstant: view.frame.width),
-//            imageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: CGFloat((item.height / item.width)))
         ])
     }
     
@@ -189,9 +185,57 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
             titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor)
             titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.intrinsicContentSize.height)
         ])
     }
 }
+
+extension DetailViewController: CoreDataManageable {
+    func saveData() {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Bookmark", in: container.viewContext),
+              let userEntity = NSEntityDescription.entity(forEntityName: "User", in: container.viewContext) else {
+            return
+        }
+        
+        let userData = NSManagedObject(entity: userEntity, insertInto: container.viewContext)
+        userData.setValue(element.user.id, forKey: "id")
+        userData.setValue(element.user.username, forKey: "username")
+        
+        let photos = NSManagedObject(entity: entity, insertInto: container.viewContext)
+        
+        photos.setValue(UUID(), forKey: "id")
+        photos.setValue(element.title, forKey: "title")
+        photos.setValue(element.width, forKey: "width")
+        photos.setValue(element.height, forKey: "height")
+        photos.setValue(element.descriptions, forKey: "descriptions")
+        photos.setValue(element.altDescription, forKey: "altDescription")
+        photos.setValue(element.urls, forKey: "urls")
+        photos.setValue(element.likedByUser, forKey: "likedByUser")
+        photos.setValue(userData, forKey: "user")
+        
+        do {
+            try container.viewContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func deleteData(_ photo: DetailElement) {
+        let fetchRequest = BookmarkMO.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id = %@", photo.id as CVarArg)
+        
+        do {
+            guard let result = try? container.viewContext.fetch(fetchRequest),
+                  let object = result.first else {
+                return
+            }
+            
+            container.viewContext.delete(object)
+            try container.viewContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
+
 
