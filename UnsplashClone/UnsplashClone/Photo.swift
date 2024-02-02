@@ -31,8 +31,4 @@ struct PhotoElement: Decodable, Hashable {
         case likedByUser = "liked_by_user"
         case user
     }
-    
-    var size: CGSize {
-        CGSize(width: 200, height: height / width * 200)
-    }
 }
