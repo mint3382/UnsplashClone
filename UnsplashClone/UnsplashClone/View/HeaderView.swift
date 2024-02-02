@@ -11,7 +11,7 @@ class HeaderView: UICollectionReusableView {
     static let identifier = "HeaderView"
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
