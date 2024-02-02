@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9233D6882B6C8737008514C7 /* DetailElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6872B6C8737008514C7 /* DetailElement.swift */; };
+		9233D68B2B6C89AB008514C7 /* ModelData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6892B6C89AB008514C7 /* ModelData.xcdatamodeld */; };
+		9233D6A02B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D69C2B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift */; };
+		9233D6A12B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D69D2B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift */; };
+		9233D6A22B6C8E5F008514C7 /* UserMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D69E2B6C8E5F008514C7 /* UserMO+CoreDataClass.swift */; };
+		9233D6A32B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D69F2B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift */; };
 		92567D742B677455005943D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D732B677455005943D1 /* AppDelegate.swift */; };
 		92567D762B677455005943D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D752B677455005943D1 /* SceneDelegate.swift */; };
 		92567D782B677455005943D1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D772B677455005943D1 /* MainViewController.swift */; };
@@ -32,6 +38,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9233D68A2B6C89AB008514C7 /* ModelData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelData.xcdatamodel; sourceTree = "<group>"; };
+		9233D69C2B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9233D69D2B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9233D69E2B6C8E5F008514C7 /* UserMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9233D69F2B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		92567D702B677455005943D1 /* UnsplashClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92567D732B677455005943D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92567D752B677455005943D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +83,10 @@
 		92567D672B677455005943D1 = {
 			isa = PBXGroup;
 			children = (
+				9233D69C2B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift */,
+				9233D69D2B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift */,
+				9233D69E2B6C8E5F008514C7 /* UserMO+CoreDataClass.swift */,
+				9233D69F2B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift */,
 				92567D722B677455005943D1 /* UnsplashClone */,
 				92567D712B677455005943D1 /* Products */,
 			);
@@ -258,13 +273,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				92567DA82B68136C005943D1 /* PhotoCell.swift in Sources */,
+				9233D6A12B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift in Sources */,
 				92567D922B67DB29005943D1 /* Photo.swift in Sources */,
 				92567D782B677455005943D1 /* MainViewController.swift in Sources */,
 				92567DB32B68E083005943D1 /* ImageViewDownloadable.swift in Sources */,
 				92567DB02B68DED6005943D1 /* BookmarkCell.swift in Sources */,
 				92567D9D2B67FC53005943D1 /* EndPoint.swift in Sources */,
 				92567D8A2B677581005943D1 /* RandomPhotoViewController.swift in Sources */,
+				9233D68B2B6C89AB008514C7 /* ModelData.xcdatamodeld in Sources */,
 				92567D942B67F75F005943D1 /* User.swift in Sources */,
+				9233D6A32B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift in Sources */,
+				9233D6A02B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift in Sources */,
 				92567D882B677503005943D1 /* TabBarController.swift in Sources */,
 				92567D972B67F79A005943D1 /* Section.swift in Sources */,
 				92567DC62B69C5DF005943D1 /* DetailViewController.swift in Sources */,
@@ -272,6 +291,7 @@
 				92567DA62B680B4D005943D1 /* APIProvider.swift in Sources */,
 				92567DAE2B689D62005943D1 /* URLs.swift in Sources */,
 				92567DA12B6801F3005943D1 /* HTTP.swift in Sources */,
+				9233D6A22B6C8E5F008514C7 /* UserMO+CoreDataClass.swift in Sources */,
 				92567DA32B680A8C005943D1 /* NetworkError.swift in Sources */,
 				92567D762B677455005943D1 /* SceneDelegate.swift in Sources */,
 				92567DC82B6A4B9E005943D1 /* UIImage+.swift in Sources */,
@@ -489,6 +509,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9233D6892B6C89AB008514C7 /* ModelData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9233D68A2B6C89AB008514C7 /* ModelData.xcdatamodel */,
+			);
+			currentVersion = 9233D68A2B6C89AB008514C7 /* ModelData.xcdatamodel */;
+			path = ModelData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 92567D682B677455005943D1 /* Project object */;
 }
