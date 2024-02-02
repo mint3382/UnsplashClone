@@ -15,7 +15,7 @@
 		9233D6A32B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D69F2B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift */; };
 		92567D742B677455005943D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D732B677455005943D1 /* AppDelegate.swift */; };
 		92567D762B677455005943D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D752B677455005943D1 /* SceneDelegate.swift */; };
-		92567D782B677455005943D1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D772B677455005943D1 /* MainViewController.swift */; };
+		92567D782B677455005943D1 /* RecentImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D772B677455005943D1 /* RecentImageViewController.swift */; };
 		92567D7D2B677456005943D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92567D7C2B677456005943D1 /* Assets.xcassets */; };
 		92567D802B677456005943D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92567D7E2B677456005943D1 /* LaunchScreen.storyboard */; };
 		92567D882B677503005943D1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D872B677503005943D1 /* TabBarController.swift */; };
@@ -48,7 +48,7 @@
 		92567D702B677455005943D1 /* UnsplashClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92567D732B677455005943D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92567D752B677455005943D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		92567D772B677455005943D1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		92567D772B677455005943D1 /* RecentImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentImageViewController.swift; sourceTree = "<group>"; };
 		92567D7C2B677456005943D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92567D7F2B677456005943D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92567D812B677456005943D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				92567D872B677503005943D1 /* TabBarController.swift */,
-				92567D772B677455005943D1 /* MainViewController.swift */,
+				92567D772B677455005943D1 /* RecentImageViewController.swift */,
 				92567D892B677581005943D1 /* RandomPhotoViewController.swift */,
 				92567DC52B69C5DF005943D1 /* DetailViewController.swift */,
 			);
@@ -157,6 +157,8 @@
 			children = (
 				92567D952B67F77B005943D1 /* DTO */,
 				92567D962B67F79A005943D1 /* Section.swift */,
+				9233D6872B6C8737008514C7 /* DetailElement.swift */,
+				9233D6892B6C89AB008514C7 /* ModelData.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -279,7 +281,7 @@
 				92567DA82B68136C005943D1 /* PhotoCell.swift in Sources */,
 				9233D6A12B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift in Sources */,
 				92567D922B67DB29005943D1 /* Photo.swift in Sources */,
-				92567D782B677455005943D1 /* MainViewController.swift in Sources */,
+				92567D782B677455005943D1 /* RecentImageViewController.swift in Sources */,
 				92567DB32B68E083005943D1 /* ImageViewDownloadable.swift in Sources */,
 				92567DB02B68DED6005943D1 /* BookmarkCell.swift in Sources */,
 				92567D9D2B67FC53005943D1 /* EndPoint.swift in Sources */,
