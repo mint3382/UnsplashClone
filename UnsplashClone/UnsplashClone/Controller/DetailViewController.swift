@@ -52,7 +52,7 @@ final class DetailViewController: UIViewController, ImageViewDownloadable {
     
     private let usernameLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textColor = .white
         
         
@@ -61,7 +61,7 @@ final class DetailViewController: UIViewController, ImageViewDownloadable {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
         
         return label
@@ -171,8 +171,8 @@ final class DetailViewController: UIViewController, ImageViewDownloadable {
         view.addSubview(totalStackView)
         
         NSLayoutConstraint.activate([
-            totalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            totalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
+            totalStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            totalStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             totalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
             totalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12)
         ])
