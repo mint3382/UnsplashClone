@@ -25,13 +25,19 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
 
         bookmarks = PhotoService.shared.fetchData()
         registerCollectionView()
-        configureCollectionVewUI()
+        configureCollectionViewUI()
         setDataSource()
         setSnapshot()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        bookmarks = PhotoService.shared.fetchData()
+    }
+    
     //컬렉션뷰 위치 오토 레이아웃
-    func configureCollectionVewUI() {
+    func configureCollectionViewUI() {
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
