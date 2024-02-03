@@ -339,12 +339,11 @@ extension MainViewController: BookmarkProtocol {
 
 ## 👥 회고
 
-### 😈MINT
+### [😈MINT](https://github.com/mint3382)
 길다고 생각했던 일주일은 몹시나 짧았다. 처음 사용해보는 collectionView, flowLayout, compositionalLayout, DiffableDataSource등에 치여 구조적인 고민과 깔끔한 코드, 로직을 생각할 시간이 부족했다. 불필요한 부분들, 중복적인 요소들을 배제하고 싶었지만 그러한 점까지 함께 가져가기에는 여전히 스스로가 많이 노력해야 한다고 느꼈다.
 
 최우선으로 했던 것은 구현이었다. 사용자가 느끼기에, 동작하지 않는 부분이 없도록 하는 것이 목표였고, 그 외에 제스쳐 등은 뒤로 미뤘다. 그러나 pinterest에 시간을 많이 빼앗겨 무한 스크롤을 구현하지 못한 점이 쓰리다. 이래저래 아쉬운 것들이 많고 욕심이 나는 과제였지만, 붙잡고 있음에 행복했던 시간이었다. 다만 다음에 이러한 과제를 받는다면, 처음에 가볍게라도 구조를 정리해놓고 스텝을 나누는 것이 더 효율적일 것 같다. 
 
-[Github Profile](https://github.com/mint3382)
 [Trouble_Shooting Log](https://mintraum.tistory.com/)
 
 </br>
