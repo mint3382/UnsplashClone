@@ -9,13 +9,7 @@ import UIKit
 import CoreData
 
 class BookmarkViewController: UIViewController, UICollectionViewDelegate {
-    var container: NSPersistentContainer = (UIApplication.shared.delegate as! AppDelegate).container {
-        didSet {
-            fetchData()
-        }
-    }
-    
-    private var bookmarks: [DetailElement] = []
+    private var bookmarks: [DetailElement] = PhotoService.shared.fetchData()
     {
         didSet {
             setSnapshot()
@@ -29,20 +23,12 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        configureView()
-        fetchData()
+        bookmarks = PhotoService.shared.fetchData()
         registerCollectionView()
         configureCollectionVewUI()
         setDataSource()
         setSnapshot()
     }
-    
-//    func configureView() {
-//        NSLayoutConstraint.activate([
-//            view.widthAnchor.constraint(equalToConstant: view.frame.width),
-//            view.heightAnchor.constraint(equalToConstant: 300)
-//        ])
-//    }
     
     //컬렉션뷰 위치 오토 레이아웃
     func configureCollectionVewUI() {
@@ -79,7 +65,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(130), heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(8)
         
@@ -96,7 +82,6 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     
     //디퍼블 데이터 소스 세팅
     func setDataSource() {
-        
         dataSource = UICollectionViewDiffableDataSource<Int, DetailElement>(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -129,27 +114,24 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
         
         dataSource?.apply(snapshot)
     }
+    
+    //cell 클릭시 디테일뷰로 이동
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = bookmarks[indexPath.item]
+        let cell = collectionView.cellForItem(at: indexPath) as? BookmarkCell
+        guard let image = cell?.imageView.image else {
+            return
+        }
+        let detailViewController: DetailViewController
+       
+        detailViewController = DetailViewController(item: item, image: image)
+        detailViewController.delegate = self
+        self.present(detailViewController, animated: true)
+    }
 }
 
-extension BookmarkViewController: CoreDataManageable {
-    func fetchData() {
-        do {
-            var detailElementDatas = [DetailElement]()
-            let photoData = try container.viewContext.fetch(BookmarkMO.fetchRequest())
-            photoData.forEach { data in
-                if let id = data.id,
-                   let title = data.title,
-                   let altDescriptions = data.altDescription,
-                   let urls = data.urls,
-                   let userData = data.user {
-                    let user = User(id: userData.id!, username: userData.username!)
-                    let photo = DetailElement(id: id, title: title, width: Int(data.width), height: Int(data.height), descriptions: data.descriptions, altDescription: altDescriptions, urls: urls, likedByUser: data.likedByUser, user: user)
-                    detailElementDatas.append(photo)
-                }
-            }
-            bookmarks = detailElementDatas
-        } catch {
-            print(error.localizedDescription)
-        }
+extension BookmarkViewController: BookmarkUpdateDelegate {
+    func updateSnapshot() {
+        bookmarks = PhotoService.shared.fetchData()
     }
 }
