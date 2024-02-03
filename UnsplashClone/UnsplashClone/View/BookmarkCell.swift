@@ -12,12 +12,11 @@ class BookmarkCell: UICollectionViewCell, Identifiable, ImageViewDownloadable {
     var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    private let identifier: String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)

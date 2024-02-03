@@ -27,8 +27,6 @@ class PhotoCell: UICollectionViewCell, Identifiable, ImageViewDownloadable {
         return label
     }()
     
-    private let identifier: String = ""
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
