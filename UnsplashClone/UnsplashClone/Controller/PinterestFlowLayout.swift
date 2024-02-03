@@ -7,17 +7,14 @@
 
 import UIKit
 
-class PinterestFlowLayout: UICollectionViewFlowLayout {
-    weak var delegate: (PinterestFlowLayoutDelegate)?
-    var numberOfColumns = 2
-    var cellPadding: CGFloat = 4
+final class PinterestFlowLayout: UICollectionViewFlowLayout {
+    private var numberOfColumns = 2
+    private var cellPadding: CGFloat = 4
     
-    var headerCache = [UICollectionViewLayoutAttributes]()
-    //계산한 속성들을 캐시. 매 시간 다시 연산하는 것이 아닌, 캐시에 요청하는 방식으로 사용.
+    private var headerCache = [UICollectionViewLayoutAttributes]()
     private var cache = [UICollectionViewLayoutAttributes]()
     private var sectionItemAttributes = [[UICollectionViewLayoutAttributes]]()
     private var allItemAttributes = [UICollectionViewLayoutAttributes]()
-    private var unionRects = [CGRect]()
     
     //content Size를 저장하기 위한 속성들.
     //contentHeight: 사진이 추가되면 증가
@@ -44,7 +41,6 @@ class PinterestFlowLayout: UICollectionViewFlowLayout {
         
         var top: CGFloat = 0
         
-//        for section in 0..<numberOfSections {
         if numberOfSections == 1 {
             let headerHeight: CGFloat = 50
             let headerInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
@@ -101,17 +97,6 @@ class PinterestFlowLayout: UICollectionViewFlowLayout {
             
             sectionItemAttributes.append(cache)
         }
-        
-        var idx = 0
-        let itemCounts = allItemAttributes.count
-        
-        while idx < itemCounts {
-            let rect1 = allItemAttributes[idx].frame
-            idx = min(idx + 20, itemCounts) - 1
-            let rect2 = allItemAttributes[idx].frame
-            unionRects.append(rect1.union(rect2))
-            idx += 1
-        }
     }
     
 //    모든 셀과 보충 뷰의 레이아웃 정보 리턴
@@ -134,11 +119,5 @@ class PinterestFlowLayout: UICollectionViewFlowLayout {
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return headerCache[indexPath.section]
-    }
-    
-    private func invalidateIfNotEqual<T: Equatable>(_ oldValue: T, newValue: T) {
-        if oldValue != newValue {
-            invalidateLayout()
-        }
     }
 }

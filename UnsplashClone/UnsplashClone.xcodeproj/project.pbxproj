@@ -15,7 +15,6 @@
 		9233D6B22B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6AE2B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift */; };
 		9233D6B32B6DDCBE008514C7 /* BookmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6AF2B6DDCBE008514C7 /* BookmarkMO+CoreDataProperties.swift */; };
 		9233D6B52B6E24FD008514C7 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6B42B6E24FD008514C7 /* PhotoService.swift */; };
-		9233D6B82B6E3D67008514C7 /* PinterestFlowLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6B72B6E3D67008514C7 /* PinterestFlowLayoutDelegate.swift */; };
 		9233D6BA2B6E3DA3008514C7 /* PinterestFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6B92B6E3DA3008514C7 /* PinterestFlowLayout.swift */; };
 		9233D6BC2B6E466A008514C7 /* DetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6BB2B6E466A008514C7 /* DetailDelegate.swift */; };
 		9233D6BE2B6E9F49008514C7 /* BookmarkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6BD2B6E9F49008514C7 /* BookmarkDelegate.swift */; };
@@ -50,7 +49,6 @@
 		9233D6AE2B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9233D6AF2B6DDCBE008514C7 /* BookmarkMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9233D6B42B6E24FD008514C7 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
-		9233D6B72B6E3D67008514C7 /* PinterestFlowLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestFlowLayoutDelegate.swift; sourceTree = "<group>"; };
 		9233D6B92B6E3DA3008514C7 /* PinterestFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestFlowLayout.swift; sourceTree = "<group>"; };
 		9233D6BB2B6E466A008514C7 /* DetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDelegate.swift; sourceTree = "<group>"; };
 		9233D6BD2B6E9F49008514C7 /* BookmarkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDelegate.swift; sourceTree = "<group>"; };
@@ -89,15 +87,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9233D6B62B6E3D4B008514C7 /* PinterestLayout */ = {
-			isa = PBXGroup;
-			children = (
-				9233D6B72B6E3D67008514C7 /* PinterestFlowLayoutDelegate.swift */,
-				9233D6B92B6E3DA3008514C7 /* PinterestFlowLayout.swift */,
-			);
-			path = PinterestLayout;
-			sourceTree = "<group>";
-		};
 		92567D672B677455005943D1 = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +128,7 @@
 		92567D8B2B67D8EF005943D1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9233D6B62B6E3D4B008514C7 /* PinterestLayout */,
+				9233D6B92B6E3DA3008514C7 /* PinterestFlowLayout.swift */,
 				92567D872B677503005943D1 /* TabBarController.swift */,
 				92567D772B677455005943D1 /* MainViewController.swift */,
 				9233D6A82B6C9203008514C7 /* BookmarkViewController.swift */,
@@ -300,7 +289,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				92567DA82B68136C005943D1 /* PhotoCell.swift in Sources */,
-				9233D6B82B6E3D67008514C7 /* PinterestFlowLayoutDelegate.swift in Sources */,
 				9233D6B22B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift in Sources */,
 				92567D922B67DB29005943D1 /* Photo.swift in Sources */,
 				9233D6BE2B6E9F49008514C7 /* BookmarkDelegate.swift in Sources */,

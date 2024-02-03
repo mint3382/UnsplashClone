@@ -186,16 +186,6 @@ extension MainViewController {
     }
 }
 
-extension MainViewController: PinterestFlowLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView, heightIndexPath indexPath: IndexPath) -> CGFloat {
-        return CGFloat.random(in: 100...300)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView) -> CGFloat {
-        return 150
-    }
-}
-
 extension MainViewController: BookmarkProtocol {
     func updateConfiguration() {
         bookmarkController?.bookmarks = PhotoService.shared.fetchData()
