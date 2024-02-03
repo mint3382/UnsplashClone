@@ -222,6 +222,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
             photo.forEach { photoElement in
                 photoItems.append(photoElement)
             }
+            currentPage = 0
         } catch {
             //TODO: 실패 알럿
             print(error.localizedDescription)
