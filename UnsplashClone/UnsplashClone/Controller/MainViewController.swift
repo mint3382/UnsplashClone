@@ -17,7 +17,7 @@ final class MainViewController: UIViewController, UICollectionViewDelegate {
         }
     }
 
-    var constraints: [NSLayoutConstraint] = []
+    private var constraints: [NSLayoutConstraint] = []
     private var bookmarkController: BookmarkViewController?
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Int, PhotoElement>?
@@ -31,7 +31,7 @@ final class MainViewController: UIViewController, UICollectionViewDelegate {
         configureCollectionView()
         updateBookMarkViewController()
         configureCollectionViewUI()
-        collectionView.reloadData()
+//        collectionView.reloadData()
         setDataSource()
         setSnapShot()
     }
@@ -106,9 +106,9 @@ extension MainViewController {
         
         //레이아웃 설정하기
         let layout = PinterestFlowLayout()
-        layout.headerReferenceSize = .init(width: 300, height: 100)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.minimumInteritemSpacing = 10
+//        layout.headerReferenceSize = .init(width: 300, height: 100)
+//        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+//        layout.minimumInteritemSpacing = 10
         
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
