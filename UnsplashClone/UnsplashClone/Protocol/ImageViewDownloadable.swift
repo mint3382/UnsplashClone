@@ -16,11 +16,13 @@ extension ImageViewDownloadable {
         let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error as NSError? {
                 print(error.localizedDescription)
+                self.imageView.image = UIImage(named: "noImage")
                 return
             }
             
             guard let data,
                   let image = UIImage(data: data) else {
+                self.imageView.image = UIImage(named: "noImage")
                 print("download error: \(String(describing: error?.localizedDescription))")
                 return
             }
