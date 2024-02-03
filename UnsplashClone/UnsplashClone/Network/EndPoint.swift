@@ -29,7 +29,10 @@ struct EndPoint {
     }
 
     private func configureQuery(_ query: [URLQueryItem]?) -> [URLQueryItem] {
-        var queries: [URLQueryItem] = [URLQueryItem(name: "client_id", value: "")]
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else {
+            return []
+        }
+        var queries: [URLQueryItem] = [URLQueryItem(name: "client_id", value: apiKey)]
         
         query?.forEach({ URLQueryItem in
             queries.append(URLQueryItem)
