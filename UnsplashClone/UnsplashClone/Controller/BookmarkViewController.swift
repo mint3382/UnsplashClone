@@ -47,7 +47,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     func registerCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
         collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.identifier)
-        collectionView.register(BookmarkCell.self, forCellWithReuseIdentifier: BookmarkCell.id)
+        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.id)
         
         collectionView.setCollectionViewLayout(createLayout(), animated: true)
         collectionView.delegate = self
@@ -86,11 +86,11 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: BookmarkCell.id,
-                for: indexPath) as? BookmarkCell else {
+                withReuseIdentifier: PhotoCell.id,
+                for: indexPath) as? PhotoCell else {
                 return UICollectionViewCell()
             }
-            cell.configureImage(url: URL(string: itemIdentifier.urls)!)
+                cell.configureImage(title: itemIdentifier.title, url: URL(string: itemIdentifier.urls)!)
             
             return cell
         })
@@ -118,7 +118,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     //cell 클릭시 디테일뷰로 이동
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = bookmarks[indexPath.item]
-        let cell = collectionView.cellForItem(at: indexPath) as? BookmarkCell
+        let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell
         guard let image = cell?.imageView.image else {
             return
         }
