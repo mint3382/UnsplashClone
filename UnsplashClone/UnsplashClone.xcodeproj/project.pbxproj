@@ -17,7 +17,8 @@
 		9233D6B52B6E24FD008514C7 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6B42B6E24FD008514C7 /* PhotoService.swift */; };
 		9233D6B82B6E3D67008514C7 /* PinterestFlowLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6B72B6E3D67008514C7 /* PinterestFlowLayoutDelegate.swift */; };
 		9233D6BA2B6E3DA3008514C7 /* PinterestFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6B92B6E3DA3008514C7 /* PinterestFlowLayout.swift */; };
-		9233D6BC2B6E466A008514C7 /* BookmarkUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6BB2B6E466A008514C7 /* BookmarkUpdateDelegate.swift */; };
+		9233D6BC2B6E466A008514C7 /* DetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6BB2B6E466A008514C7 /* DetailDelegate.swift */; };
+		9233D6BE2B6E9F49008514C7 /* BookmarkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6BD2B6E9F49008514C7 /* BookmarkDelegate.swift */; };
 		92567D742B677455005943D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D732B677455005943D1 /* AppDelegate.swift */; };
 		92567D762B677455005943D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D752B677455005943D1 /* SceneDelegate.swift */; };
 		92567D782B677455005943D1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D772B677455005943D1 /* MainViewController.swift */; };
@@ -51,7 +52,8 @@
 		9233D6B42B6E24FD008514C7 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		9233D6B72B6E3D67008514C7 /* PinterestFlowLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestFlowLayoutDelegate.swift; sourceTree = "<group>"; };
 		9233D6B92B6E3DA3008514C7 /* PinterestFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestFlowLayout.swift; sourceTree = "<group>"; };
-		9233D6BB2B6E466A008514C7 /* BookmarkUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkUpdateDelegate.swift; sourceTree = "<group>"; };
+		9233D6BB2B6E466A008514C7 /* DetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDelegate.swift; sourceTree = "<group>"; };
+		9233D6BD2B6E9F49008514C7 /* BookmarkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDelegate.swift; sourceTree = "<group>"; };
 		92567D702B677455005943D1 /* UnsplashClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92567D732B677455005943D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92567D752B677455005943D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -217,7 +219,8 @@
 			isa = PBXGroup;
 			children = (
 				92567DB22B68E083005943D1 /* ImageViewDownloadable.swift */,
-				9233D6BB2B6E466A008514C7 /* BookmarkUpdateDelegate.swift */,
+				9233D6BB2B6E466A008514C7 /* DetailDelegate.swift */,
+				9233D6BD2B6E9F49008514C7 /* BookmarkDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				9233D6B82B6E3D67008514C7 /* PinterestFlowLayoutDelegate.swift in Sources */,
 				9233D6B22B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift in Sources */,
 				92567D922B67DB29005943D1 /* Photo.swift in Sources */,
+				9233D6BE2B6E9F49008514C7 /* BookmarkDelegate.swift in Sources */,
 				92567D782B677455005943D1 /* MainViewController.swift in Sources */,
 				92567DB32B68E083005943D1 /* ImageViewDownloadable.swift in Sources */,
 				92567D9D2B67FC53005943D1 /* EndPoint.swift in Sources */,
@@ -322,7 +326,7 @@
 				9233D6882B6C8737008514C7 /* DetailElement.swift in Sources */,
 				9233D6B52B6E24FD008514C7 /* PhotoService.swift in Sources */,
 				92567DC82B6A4B9E005943D1 /* UIImage+.swift in Sources */,
-				9233D6BC2B6E466A008514C7 /* BookmarkUpdateDelegate.swift in Sources */,
+				9233D6BC2B6E466A008514C7 /* DetailDelegate.swift in Sources */,
 				9233D6B12B6DDCBE008514C7 /* UserMO+CoreDataProperties.swift in Sources */,
 				92567D9A2B67FB8B005943D1 /* Decodable+.swift in Sources */,
 			);

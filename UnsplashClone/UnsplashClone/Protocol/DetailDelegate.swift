@@ -5,6 +5,6 @@
 //  Created by minsong kim on 2/3/24.
 //
 
-protocol BookmarkUpdateDelegate {
+protocol DetailDelegate {
     func updateSnapshot()
 }

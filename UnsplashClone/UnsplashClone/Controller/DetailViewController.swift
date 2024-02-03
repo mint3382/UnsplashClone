@@ -10,7 +10,7 @@ import CoreData
 
 final class DetailViewController: UIViewController, ImageViewDownloadable {
     static let identifier = "DetailViewController"
-    var delegate: BookmarkUpdateDelegate?
+    var delegate: DetailDelegate?
     private var element: DetailElement
     private var image: UIImage?
     

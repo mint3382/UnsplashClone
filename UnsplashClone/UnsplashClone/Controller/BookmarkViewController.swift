@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 final class BookmarkViewController: UIViewController, UICollectionViewDelegate {
-    private var bookmarks: [DetailElement] = PhotoService.shared.fetchData()
+    var bookmarks: [DetailElement] = PhotoService.shared.fetchData()
     {
         didSet {
             setSnapshot()
@@ -18,7 +18,7 @@ final class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Int, DetailElement>?
-    
+    var delegate: BookmarkProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,8 +136,9 @@ final class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     }
 }
 
-extension BookmarkViewController: BookmarkUpdateDelegate {
+extension BookmarkViewController: DetailDelegate {
     func updateSnapshot() {
         bookmarks = PhotoService.shared.fetchData()
+        delegate?.updateConfiguration()
     }
 }

@@ -92,4 +92,12 @@ final class PhotoService {
         
         return object.likedByUser
     }
+    
+    func isBookmarkExist() -> Bool {
+        if fetchData().isEmpty {
+            return false
+        } else {
+            return true
+        }
+    }
 }

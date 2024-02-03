@@ -17,7 +17,8 @@ final class MainViewController: UIViewController, UICollectionViewDelegate {
         }
     }
 
-    private let bookmarkController = BookmarkViewController()
+    var constraints: [NSLayoutConstraint] = []
+    private var bookmarkController: BookmarkViewController?
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Int, PhotoElement>?
     
@@ -35,7 +36,23 @@ final class MainViewController: UIViewController, UICollectionViewDelegate {
         setSnapShot()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.removeConstraints(constraints)
+        updateBookMarkViewController()
+        configureCollectionViewUI()
+    }
+    
     private func updateBookMarkViewController() {
+        bookmarkController = BookmarkViewController()
+        bookmarkController?.delegate = self
+        
+        guard PhotoService.shared.isBookmarkExist(),
+                let bookmarkController else {
+            return
+        }
+        
         addChild(bookmarkController)
         view.addSubview(bookmarkController.view)
         bookmarkController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -56,19 +73,32 @@ extension MainViewController {
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: bookmarkController.view.bottomAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
-        ])
+        if PhotoService.shared.isBookmarkExist(),
+           let bookmarkController {
+            constraints = [
+                collectionView.topAnchor.constraint(equalTo: bookmarkController.view.bottomAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+                collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
+            ]
+        } else {
+            constraints = [
+                collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+                collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
+            ]
+        }
+        
+        view.addConstraints(constraints)
+        view.updateConstraints()
+        
     }
     
     //컬렉션뷰 등록하기
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
         collectionView.delegate = self
-//        collectionView.dataSource = self
         
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.id)
         //헤더뷰 등록
@@ -163,5 +193,15 @@ extension MainViewController: PinterestFlowLayoutDelegate {
     
     func collectionView(_ collectionView: UICollectionView) -> CGFloat {
         return 150
+    }
+}
+
+extension MainViewController: BookmarkProtocol {
+    func updateConfiguration() {
+        bookmarkController?.bookmarks = PhotoService.shared.fetchData()
+        
+        view.removeConstraints(constraints)
+        updateBookMarkViewController()
+        configureCollectionViewUI()
     }
 }
