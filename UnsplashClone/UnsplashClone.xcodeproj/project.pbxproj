@@ -38,7 +38,6 @@
 		92567DB32B68E083005943D1 /* ImageViewDownloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DB22B68E083005943D1 /* ImageViewDownloadable.swift */; };
 		92567DC62B69C5DF005943D1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DC52B69C5DF005943D1 /* DetailViewController.swift */; };
 		92567DC82B6A4B9E005943D1 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DC72B6A4B9E005943D1 /* UIImage+.swift */; };
-		92567DCA2B6A5F1B005943D1 /* RandomPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DC92B6A5F1B005943D1 /* RandomPhotoCell.swift */; };
 		92567DCC2B6BC616005943D1 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567DCB2B6BC616005943D1 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +75,6 @@
 		92567DB22B68E083005943D1 /* ImageViewDownloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewDownloadable.swift; sourceTree = "<group>"; };
 		92567DC52B69C5DF005943D1 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		92567DC72B6A4B9E005943D1 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
-		92567DC92B6A5F1B005943D1 /* RandomPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPhotoCell.swift; sourceTree = "<group>"; };
 		92567DCB2B6BC616005943D1 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,7 +164,6 @@
 				92567D7E2B677456005943D1 /* LaunchScreen.storyboard */,
 				92567DA72B68136C005943D1 /* PhotoCell.swift */,
 				92567DAF2B68DED6005943D1 /* BookmarkCell.swift */,
-				92567DC92B6A5F1B005943D1 /* RandomPhotoCell.swift */,
 				92567DCB2B6BC616005943D1 /* HeaderView.swift */,
 			);
 			path = View;
@@ -332,7 +329,6 @@
 				9233D6BC2B6E466A008514C7 /* BookmarkUpdateDelegate.swift in Sources */,
 				9233D6B12B6DDCBE008514C7 /* UserMO+CoreDataProperties.swift in Sources */,
 				92567D9A2B67FB8B005943D1 /* Decodable+.swift in Sources */,
-				92567DCA2B6A5F1B005943D1 /* RandomPhotoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
