@@ -8,13 +8,13 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController, ImageViewDownloadable {
+final class DetailViewController: UIViewController, ImageViewDownloadable {
     static let identifier = "DetailViewController"
     var delegate: BookmarkUpdateDelegate?
-    var element: DetailElement
-    var image: UIImage?
+    private var element: DetailElement
+    private var image: UIImage?
     
-    let totalStackView: UIStackView = {
+    private let totalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,7 +23,7 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         return stackView
     }()
     
-    let informationStackView: UIStackView = {
+    private let informationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -32,7 +32,7 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
     }()
     
     //TODO: 각 라벨 및 버튼 위치가 매번 다르지 않게 수정할 것
-    let barStackView: UIStackView = {
+    private let barStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
@@ -49,7 +49,8 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         
         return imageView
     }()
-    let usernameLabel: UILabel = {
+    
+    private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
         label.textColor = .white
@@ -57,14 +58,16 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         
         return label
     }()
-    let titleLabel: UILabel = {
+    
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title2)
         label.textColor = .white
         
         return label
     }()
-    let descriptionLabel: UILabel = {
+    
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption1)
         label.textColor = .white
@@ -72,7 +75,8 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         
         return label
     }()
-    let downloadButton: UIButton = {
+    
+    private let downloadButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "download")?.resize(targetSize: CGSize(width: 30, height: 30))
         button.setImage(image, for: .normal)
@@ -80,7 +84,8 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         
         return button
     }()
-    let bookmarkButton: UIButton = {
+    
+    private let bookmarkButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "bookmark")?.resize(targetSize: CGSize(width: 30, height: 30))
         button.setImage(image, for: .normal)
@@ -88,7 +93,8 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         
         return button
     }()
-    let closeButton: UIButton = {
+    
+    private let closeButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "close")?.resize(targetSize: CGSize(width: 40, height: 40))
         button.setImage(image, for: .normal)
@@ -97,7 +103,7 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         return button
     }()
     
-    @objc func tappedBookmarkButton() {
+    @objc private func tappedBookmarkButton() {
         if element.likedByUser == false {
             bookmarkButton.layer.opacity = 0.7
             element.likedByUser = true
@@ -110,11 +116,11 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         delegate?.updateSnapshot()
     }
     
-    @objc func tappedCloseButton() {
+    @objc private func tappedCloseButton() {
         self.dismiss(animated: true)
     }
     
-    @objc func tappedDownloadButton() {
+    @objc private func tappedDownloadButton() {
         self.downloadImageToGallery(url: URL(string: element.urls)!)
     }
     
@@ -145,7 +151,7 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         configureStackView()
     }
     
-    func configureStackView() {
+    private func configureStackView() {
         self.titleLabel.text = element.title
         self.usernameLabel.text = element.user.username
         self.descriptionLabel.text = element.altDescription
@@ -172,7 +178,7 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         ])
     }
     
-    func configureImage() {
+    private func configureImage() {
         imageView.sizeToFit()
         view.addSubview(imageView)
         
@@ -184,7 +190,7 @@ class DetailViewController: UIViewController, ImageViewDownloadable {
         ])
     }
     
-    func configureLabel() {
+    private func configureLabel() {
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([

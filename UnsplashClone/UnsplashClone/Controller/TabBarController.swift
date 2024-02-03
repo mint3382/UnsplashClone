@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.tintColor = .white
@@ -17,7 +17,7 @@ class TabBarController: UITabBarController {
         setUpViewControllers()
     }
     
-    func setUpViewControllers() {
+    private func setUpViewControllers() {
         let main = UINavigationController(rootViewController: MainViewController())
         let randomPhoto = UINavigationController(rootViewController: RandomPhotoViewController())
         

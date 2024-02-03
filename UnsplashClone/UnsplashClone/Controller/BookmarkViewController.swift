@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class BookmarkViewController: UIViewController, UICollectionViewDelegate {
+final class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     private var bookmarks: [DetailElement] = PhotoService.shared.fetchData()
     {
         didSet {
@@ -37,7 +37,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     }
     
     //컬렉션뷰 위치 오토 레이아웃
-    func configureCollectionViewUI() {
+    private func configureCollectionViewUI() {
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -50,7 +50,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     }
     
     //컬렉션뷰 등록
-    func registerCollectionView() {
+    private func registerCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
         collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.identifier)
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.id)
@@ -60,14 +60,14 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     }
     
     //컬렉션뷰 레이아웃 등록
-    func createLayout() -> UICollectionViewCompositionalLayout {
+    private func createLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, _ in
             return self?.createBookmarkSection()
         })
     }
     
     //레이아웃에 넣을 섹션 등록
-    func createBookmarkSection() -> NSCollectionLayoutSection {
+    private func createBookmarkSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
@@ -87,7 +87,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     }
     
     //디퍼블 데이터 소스 세팅
-    func setDataSource() {
+    private func setDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Int, DetailElement>(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -112,7 +112,7 @@ class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     }
     
     //스냅샷 세팅
-    func setSnapshot() {
+    private func setSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, DetailElement>()
         
         snapshot.appendSections([0])

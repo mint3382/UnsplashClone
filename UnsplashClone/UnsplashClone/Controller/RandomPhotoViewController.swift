@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
+final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
     private var photoItems: [PhotoElement] = []
     private var currentPage: Int?
     
@@ -18,7 +18,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         return imageView
     }()
     
-    var backView: UIView = {
+    private let backView: UIView = {
         let view = UIView()
         view.layer.borderColor = .init(gray: 0.8, alpha: 1)
         view.layer.borderWidth = 2
@@ -29,7 +29,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         return view
     }()
     
-    var imageBackView: UIView = {
+    private let imageBackView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
         view.layer.cornerRadius = 10
@@ -39,7 +39,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         return view
     }()
     
-    let closeButton: UIButton = {
+    private let closeButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "close2")?.resize(targetSize: CGSize(width: 40, height: 40))
         image?.withTintColor(.white)
@@ -51,7 +51,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         return button
     }()
     
-    let checkButton: UIButton = {
+    private let checkButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "redBookmark")?.resize(targetSize: CGSize(width: 50, height: 50))
         button.backgroundColor = .systemBackground
@@ -61,7 +61,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         return button
     }()
     
-    let detailButton: UIButton = {
+    private let detailButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "information")?.resize(targetSize: CGSize(width: 40, height: 40))
         button.backgroundColor = .systemBackground
@@ -71,7 +71,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         return button
     }()
     
-    var buttonStackView: UIStackView = {
+    private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -93,7 +93,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         }
     }
     
-    @objc func tappedDetailButton() {
+    @objc private func tappedDetailButton() {
         guard let image = imageView.image,
               let currentPage else {
             return
@@ -114,7 +114,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         self.present(detailViewController, animated: true)
     }
     
-    @objc func tappedNextButton() {
+    @objc private func tappedNextButton() {
         guard var current = currentPage else {
             return
         }
@@ -129,7 +129,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         configureImageUI()
     }
     
-    @objc func tappedPastButton() {
+    @objc private func tappedPastButton() {
         guard var current = currentPage else {
             return
         }
@@ -145,9 +145,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         configureImageUI()
     }
     
-    
-    
-    func configureImage() {
+    private func configureImage() {
         guard let currentPage else {
             imageView.image = UIImage(named: "noImage")
             return
@@ -159,7 +157,7 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         downloadImage(url: url)
     }
     
-    func configureBackView() {
+    private func configureBackView() {
         backView.layer.shadowPath = UIBezierPath(roundedRect: backView.bounds, cornerRadius: backView.layer.cornerRadius).cgPath
         backView.layer.shadowOffset = CGSize(width: 2, height: 2)
         backView.layer.shadowColor = UIColor.black.cgColor
@@ -207,7 +205,6 @@ class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
             buttonStackView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -30)
         ])
     }
-    
     
     private func loadPhotos() async {
         let endPoint = EndPoint(queries: nil)

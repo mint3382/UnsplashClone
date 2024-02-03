@@ -8,7 +8,7 @@
 import CoreData
 import UIKit
 
-class PhotoService {
+final class PhotoService {
     static let shared = PhotoService()
     var container: NSPersistentContainer = (UIApplication.shared.delegate as! AppDelegate).container
     

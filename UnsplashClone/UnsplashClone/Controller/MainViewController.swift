@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class MainViewController: UIViewController, UICollectionViewDelegate {
+final class MainViewController: UIViewController, UICollectionViewDelegate {
     private var photos: Photo?
     private var photoItems: [PhotoElement] = []
     {
@@ -17,6 +17,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         }
     }
 
+    private let bookmarkController = BookmarkViewController()
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Int, PhotoElement>?
     
@@ -34,9 +35,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
         setSnapShot()
     }
     
-    let bookmarkController = BookmarkViewController()
-    
-    func updateBookMarkViewController() {
+    private func updateBookMarkViewController() {
         addChild(bookmarkController)
         view.addSubview(bookmarkController.view)
         bookmarkController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +52,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate {
 
 extension MainViewController {
     //컬렉션뷰 위치 잡기
-    func configureCollectionViewUI() {
+    private func configureCollectionViewUI() {
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -66,7 +65,7 @@ extension MainViewController {
     }
     
     //컬렉션뷰 등록하기
-    func configureCollectionView() {
+    private func configureCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
         collectionView.delegate = self
 //        collectionView.dataSource = self
@@ -85,7 +84,7 @@ extension MainViewController {
     }
     
 //    데이터소스 세팅
-    func setDataSource() {
+    private func setDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Int, PhotoElement>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.id, for: indexPath) as? PhotoCell else {
                 return UICollectionViewCell()
