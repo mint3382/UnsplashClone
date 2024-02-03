@@ -2,7 +2,7 @@
 //  UserMO+CoreDataClass.swift
 //  UnsplashClone
 //
-//  Created by minsong kim on 2/2/24.
+//  Created by minsong kim on 2/3/24.
 //
 //
 

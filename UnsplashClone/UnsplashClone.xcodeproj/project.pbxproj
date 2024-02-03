@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		9233D6882B6C8737008514C7 /* DetailElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6872B6C8737008514C7 /* DetailElement.swift */; };
-		9233D68B2B6C89AB008514C7 /* ModelData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6892B6C89AB008514C7 /* ModelData.xcdatamodeld */; };
-		9233D6A02B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D69C2B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift */; };
-		9233D6A12B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D69D2B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift */; };
-		9233D6A22B6C8E5F008514C7 /* UserMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D69E2B6C8E5F008514C7 /* UserMO+CoreDataClass.swift */; };
-		9233D6A32B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D69F2B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift */; };
 		9233D6A52B6C90DE008514C7 /* CoreDataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6A42B6C90DE008514C7 /* CoreDataManageable.swift */; };
 		9233D6A72B6C91E1008514C7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6A62B6C91E1008514C7 /* MainViewController.swift */; };
+		9233D68B2B6C89AB008514C7 /* BookmarkData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6892B6C89AB008514C7 /* BookmarkData.xcdatamodeld */; };
 		9233D6A92B6C9203008514C7 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6A82B6C9203008514C7 /* BookmarkViewController.swift */; };
+		9233D6B02B6DDCBE008514C7 /* UserMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6AC2B6DDCBE008514C7 /* UserMO+CoreDataClass.swift */; };
+		9233D6B12B6DDCBE008514C7 /* UserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6AD2B6DDCBE008514C7 /* UserMO+CoreDataProperties.swift */; };
+		9233D6B22B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6AE2B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift */; };
+		9233D6B32B6DDCBE008514C7 /* BookmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233D6AF2B6DDCBE008514C7 /* BookmarkMO+CoreDataProperties.swift */; };
 		92567D742B677455005943D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D732B677455005943D1 /* AppDelegate.swift */; };
 		92567D762B677455005943D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D752B677455005943D1 /* SceneDelegate.swift */; };
 		92567D782B677455005943D1 /* RecentImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92567D772B677455005943D1 /* RecentImageViewController.swift */; };
@@ -44,13 +44,13 @@
 /* Begin PBXFileReference section */
 		9233D6872B6C8737008514C7 /* DetailElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailElement.swift; sourceTree = "<group>"; };
 		9233D68A2B6C89AB008514C7 /* ModelData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelData.xcdatamodel; sourceTree = "<group>"; };
-		9233D69C2B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9233D69D2B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		9233D69E2B6C8E5F008514C7 /* UserMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9233D69F2B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9233D6A42B6C90DE008514C7 /* CoreDataManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManageable.swift; sourceTree = "<group>"; };
 		9233D6A62B6C91E1008514C7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9233D6A82B6C9203008514C7 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
+		9233D6AC2B6DDCBE008514C7 /* UserMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9233D6AD2B6DDCBE008514C7 /* UserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9233D6AE2B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9233D6AF2B6DDCBE008514C7 /* BookmarkMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookmarkMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		92567D702B677455005943D1 /* UnsplashClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92567D732B677455005943D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92567D752B677455005943D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,10 +92,10 @@
 		92567D672B677455005943D1 = {
 			isa = PBXGroup;
 			children = (
-				9233D69C2B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift */,
-				9233D69D2B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift */,
-				9233D69E2B6C8E5F008514C7 /* UserMO+CoreDataClass.swift */,
-				9233D69F2B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift */,
+				9233D6AC2B6DDCBE008514C7 /* UserMO+CoreDataClass.swift */,
+				9233D6AD2B6DDCBE008514C7 /* UserMO+CoreDataProperties.swift */,
+				9233D6AE2B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift */,
+				9233D6AF2B6DDCBE008514C7 /* BookmarkMO+CoreDataProperties.swift */,
 				92567D722B677455005943D1 /* UnsplashClone */,
 				92567D712B677455005943D1 /* Products */,
 			);
@@ -166,7 +166,7 @@
 				92567D952B67F77B005943D1 /* DTO */,
 				92567D962B67F79A005943D1 /* Section.swift */,
 				9233D6872B6C8737008514C7 /* DetailElement.swift */,
-				9233D6892B6C89AB008514C7 /* ModelData.xcdatamodeld */,
+				9233D6892B6C89AB008514C7 /* BookmarkData.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -293,7 +293,7 @@
 			files = (
 				92567DA82B68136C005943D1 /* PhotoCell.swift in Sources */,
 				9233D6A52B6C90DE008514C7 /* CoreDataManageable.swift in Sources */,
-				9233D6A12B6C8E5F008514C7 /* BookmarkMO+CoreDataProperties.swift in Sources */,
+				9233D6B22B6DDCBE008514C7 /* BookmarkMO+CoreDataClass.swift in Sources */,
 				92567D922B67DB29005943D1 /* Photo.swift in Sources */,
 				92567D782B677455005943D1 /* RecentImageViewController.swift in Sources */,
 				92567DB32B68E083005943D1 /* ImageViewDownloadable.swift in Sources */,
@@ -303,10 +303,9 @@
 				92567D8A2B677581005943D1 /* RandomPhotoViewController.swift in Sources */,
 				9233D6A92B6C9203008514C7 /* BookmarkViewController.swift in Sources */,
 				92567DCC2B6BC616005943D1 /* HeaderView.swift in Sources */,
-				9233D68B2B6C89AB008514C7 /* ModelData.xcdatamodeld in Sources */,
+				9233D6B02B6DDCBE008514C7 /* UserMO+CoreDataClass.swift in Sources */,
+				9233D68B2B6C89AB008514C7 /* BookmarkData.xcdatamodeld in Sources */,
 				92567D942B67F75F005943D1 /* User.swift in Sources */,
-				9233D6A32B6C8E5F008514C7 /* UserMO+CoreDataProperties.swift in Sources */,
-				9233D6A02B6C8E5F008514C7 /* BookmarkMO+CoreDataClass.swift in Sources */,
 				92567D882B677503005943D1 /* TabBarController.swift in Sources */,
 				92567D972B67F79A005943D1 /* Section.swift in Sources */,
 				92567DC62B69C5DF005943D1 /* DetailViewController.swift in Sources */,
@@ -314,11 +313,11 @@
 				92567DA62B680B4D005943D1 /* APIProvider.swift in Sources */,
 				92567DAE2B689D62005943D1 /* URLs.swift in Sources */,
 				92567DA12B6801F3005943D1 /* HTTP.swift in Sources */,
-				9233D6A22B6C8E5F008514C7 /* UserMO+CoreDataClass.swift in Sources */,
 				92567DA32B680A8C005943D1 /* NetworkError.swift in Sources */,
 				92567D762B677455005943D1 /* SceneDelegate.swift in Sources */,
 				9233D6882B6C8737008514C7 /* DetailElement.swift in Sources */,
 				92567DC82B6A4B9E005943D1 /* UIImage+.swift in Sources */,
+				9233D6B12B6DDCBE008514C7 /* UserMO+CoreDataProperties.swift in Sources */,
 				92567D9A2B67FB8B005943D1 /* Decodable+.swift in Sources */,
 				92567DCA2B6A5F1B005943D1 /* RandomPhotoCell.swift in Sources */,
 			);
@@ -535,13 +534,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9233D6892B6C89AB008514C7 /* ModelData.xcdatamodeld */ = {
+		9233D6892B6C89AB008514C7 /* BookmarkData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				9233D68A2B6C89AB008514C7 /* ModelData.xcdatamodel */,
 			);
 			currentVersion = 9233D68A2B6C89AB008514C7 /* ModelData.xcdatamodel */;
-			path = ModelData.xcdatamodeld;
+			path = BookmarkData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
