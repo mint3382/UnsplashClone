@@ -1,145 +1,11 @@
 //
-//  RecentImageViewController.swift
+//  PinterestFlowLayout.swift
 //  UnsplashClone
 //
-//  Created by minsong kim on 1/29/24.
+//  Created by minsong kim on 2/3/24.
 //
 
 import UIKit
-
-class RecentImageViewController: UIViewController, UICollectionViewDelegate {
-    private var photos: Photo?
-    private var photoItems: [PhotoElement] = []
-    {
-        didSet {
-            setSnapShot()
-        }
-    }
-
-    private var collectionView: UICollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<Int, PhotoElement>?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        view.backgroundColor = .systemBackground
-        
-        loadPhotos()
-        configureCollectionView()
-        configureCollectionViewUI()
-        collectionView.reloadData()
-        setDataSource()
-        setSnapShot()
-    }
-}
-
-extension RecentImageViewController {
-    //컬렉션뷰 위치 잡기
-    func configureCollectionViewUI() {
-        view.addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
-        ])
-    }
-    
-    //컬렉션뷰 등록하기
-    func configureCollectionView() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
-        collectionView.delegate = self
-//        collectionView.dataSource = self
-        
-        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.id)
-        //헤더뷰 등록
-        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.identifier)
-        
-        //레이아웃 설정하기
-        let layout = PinterestFlowLayout()
-        layout.headerReferenceSize = .init(width: 300, height: 100)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.minimumInteritemSpacing = 10
-        
-        collectionView.setCollectionViewLayout(layout, animated: true)
-    }
-    
-//    데이터소스 세팅
-    func setDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Int, PhotoElement>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.id, for: indexPath) as? PhotoCell else {
-                return UICollectionViewCell()
-            }
-            cell.configureImage(title: itemIdentifier.title, url: itemIdentifier.urls.small)
-            return cell
-        })
-        dataSource?.supplementaryViewProvider = { view, kind, indexPath in
-            guard let header = view.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderView.identifier, for: indexPath) as? HeaderView else {
-                return .init()
-            }
-            header.configureLabel(text: "최신 이미지")
-            return header
-        }
-    }
-    
-//    스냅샷 세팅
-    private func setSnapShot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, PhotoElement>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(photoItems, toSection: 0)
-        
-        dataSource?.apply(snapshot, animatingDifferences: false)
-    }
-   
-    //cell 클릭시 디테일뷰로 이동
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = photoItems[indexPath.item]
-        let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell
-        guard let image = cell?.imageView.image else {
-            return
-        }
-        let detailViewController: DetailViewController
-       
-        detailViewController = DetailViewController(item: item, image: image)
-        self.present(detailViewController, animated: true)
-    }
-}
-    
-extension RecentImageViewController {
-    private func loadPhotos() {
-        let endPoint = EndPoint(queries: nil)
-        let apiProvider = APIProvider()
-        guard let request = endPoint.configureRequest() else {
-            //TODO: 실패 알럿
-            return
-        }
-        
-        Task {
-            do {
-                let photo = try await apiProvider.fetchData(decodingType: Photo.self, request: request)
-                photoItems = photo
-                //TODO: fetch해서 얻은 photos 넘겨주기
-            } catch {
-                //TODO: 실패 알럿
-                print(error.localizedDescription)
-            }
-        }
-    }
-}
-
-extension RecentImageViewController: PinterestFlowLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView, heightIndexPath indexPath: IndexPath) -> CGFloat {
-        return CGFloat.random(in: 100...300)
-    }
-}
-
-//동적인 높이가 필요할 때 정보를 제공하는 delegate
-protocol PinterestFlowLayoutDelegate: AnyObject {
-    //사진의 높이를 요청하는 메서드
-    func collectionView(_ collectionView: UICollectionView, heightIndexPath indexPath: IndexPath) -> CGFloat
-    
-}
 
 class PinterestFlowLayout: UICollectionViewFlowLayout {
     weak var delegate: (PinterestFlowLayoutDelegate)?
@@ -148,8 +14,7 @@ class PinterestFlowLayout: UICollectionViewFlowLayout {
     
     var headerCache = [UICollectionViewLayoutAttributes]()
     //계산한 속성들을 캐시. 매 시간 다시 연산하는 것이 아닌, 캐시에 요청하는 방식으로 사용.
-    var cache = [UICollectionViewLayoutAttributes]()
-    
+    private var cache = [UICollectionViewLayoutAttributes]()
     private var sectionItemAttributes = [[UICollectionViewLayoutAttributes]]()
     private var allItemAttributes = [UICollectionViewLayoutAttributes]()
     private var unionRects = [CGRect]()
@@ -182,7 +47,7 @@ class PinterestFlowLayout: UICollectionViewFlowLayout {
 //        for section in 0..<numberOfSections {
         if numberOfSections == 1 {
             let headerHeight: CGFloat = 50
-            let headerInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+            let headerInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
             
             top += headerInset.top
             
