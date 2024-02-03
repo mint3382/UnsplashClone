@@ -8,13 +8,13 @@
 import Foundation
 
 struct DetailElement: Hashable {
-    let id: UUID
+    let id: String
     let title: String
     let width: Int
     let height: Int
     let descriptions: String?
     let altDescription: String
     let urls: String
-    let likedByUser: Bool
+    var likedByUser: Bool
     let user: User
 }
