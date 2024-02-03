@@ -21,11 +21,10 @@ class PhotoService {
             photoData.forEach { data in
                 if let id = data.id,
                    let title = data.title,
-                   let altDescriptions = data.altDescription,
                    let urls = data.urls,
                    let userData = data.user {
                     let user = User(id: userData.id!, username: userData.username!)
-                    let photo = DetailElement(id: id, title: title, width: Int(data.width), height: Int(data.height), descriptions: data.descriptions, altDescription: altDescriptions, urls: urls, likedByUser: data.likedByUser, user: user)
+                    let photo = DetailElement(id: id, title: title, width: Int(data.width), height: Int(data.height), descriptions: data.descriptions, altDescription:data.altDescription, urls: urls, likedByUser: data.likedByUser, user: user)
                     detailElementDatas.append(photo)
                 }
             }

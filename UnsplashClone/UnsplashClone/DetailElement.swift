@@ -13,7 +13,7 @@ struct DetailElement: Hashable {
     let width: Int
     let height: Int
     let descriptions: String?
-    let altDescription: String
+    let altDescription: String?
     let urls: String
     var likedByUser: Bool
     let user: User

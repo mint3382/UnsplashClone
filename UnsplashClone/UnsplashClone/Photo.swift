@@ -15,7 +15,7 @@ struct PhotoElement: Decodable, Hashable {
     let width: Int
     let height: Int
     let description: String?
-    let altDescription: String
+    let altDescription: String?
     let urls: URLs
     let likedByUser: Bool
     let user: User
