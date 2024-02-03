@@ -9,14 +9,15 @@ import UIKit
 
 class RandomPhotoViewController: UIViewController {
     private var photos: Photo?
-    var photoItems: [PhotoElement] = []
+    private var photoItems: [PhotoElement] = []
     {
         didSet {
             setSnapShot()
         }
     }
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
-    private var dataSource: UICollectionViewDiffableDataSource<Section, PhotoElement>?
+    
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    private var dataSource: UICollectionViewDiffableDataSource<Int, PhotoElement>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ class RandomPhotoViewController: UIViewController {
         configureCollectionView()
     }
     
-    func configureCollectionView() {
+    private func configureCollectionView() {
         configureCollectionViewUI()
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(RandomPhotoCell.self, forCellWithReuseIdentifier: RandomPhotoCell.id)
@@ -35,9 +36,8 @@ class RandomPhotoViewController: UIViewController {
         setSnapShot()
     }
     
-    func setDataSource() {
-        //cellProvider에서 collectionView는 현재 우리가 사용하고 있는 collectionView, indexPath는 section과 item들의 index들, itemIdentifier는 우리가 정의한 item의 타입.
-        dataSource = UICollectionViewDiffableDataSource<Section, PhotoElement>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+    private func setDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Int, PhotoElement>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RandomPhotoCell.id, for: indexPath) as? RandomPhotoCell else {
                 return UICollectionViewCell()
             }
@@ -51,15 +51,15 @@ class RandomPhotoViewController: UIViewController {
     }
     
     private func setSnapShot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, PhotoElement>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, PhotoElement>()
         
-        snapshot.appendSections([Section.main])
-        snapshot.appendItems(photoItems, toSection: Section.main)
+        snapshot.appendSections([0])
+        snapshot.appendItems(photoItems, toSection: 0)
         
         dataSource?.apply(snapshot)
     }
     
-    func configureCollectionViewUI() {
+    private func configureCollectionViewUI() {
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
@@ -79,16 +79,13 @@ class RandomPhotoViewController: UIViewController {
     }
     
     private func createRandomPhotoSection() -> NSCollectionLayoutSection {
-        //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(0.9))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(8)
         
-        //section
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
         section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: -5, trailing: 10)
@@ -111,8 +108,6 @@ class RandomPhotoViewController: UIViewController {
                 photo.forEach { photoElement in
                     photoItems.append(photoElement)
                 }
-                
-                //TODO: fetch해서 얻은 photos 넘겨주기
             } catch {
                 //TODO: 실패 알럿
                 print(error.localizedDescription)
