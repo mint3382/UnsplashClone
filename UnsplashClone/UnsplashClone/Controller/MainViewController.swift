@@ -9,7 +9,6 @@ import UIKit
 import CoreData
 
 final class MainViewController: UIViewController, UICollectionViewDelegate {
-    private var photos: Photo?
     private var photoItems: [PhotoElement] = []
     {
         didSet {
@@ -21,6 +20,7 @@ final class MainViewController: UIViewController, UICollectionViewDelegate {
     private var bookmarkController: BookmarkViewController?
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Int, PhotoElement>?
+    private let refresh = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +31,9 @@ final class MainViewController: UIViewController, UICollectionViewDelegate {
         configureCollectionView()
         updateBookMarkViewController()
         configureCollectionViewUI()
-//        collectionView.reloadData()
         setDataSource()
         setSnapShot()
+        initRefresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,9 +106,6 @@ extension MainViewController {
         
         //레이아웃 설정하기
         let layout = PinterestFlowLayout()
-//        layout.headerReferenceSize = .init(width: 300, height: 100)
-//        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-//        layout.minimumInteritemSpacing = 10
         
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
@@ -193,5 +190,19 @@ extension MainViewController: BookmarkProtocol {
         view.removeConstraints(constraints)
         updateBookMarkViewController()
         configureCollectionViewUI()
+    }
+}
+
+extension MainViewController {
+    func initRefresh() {
+        refresh.addTarget(self, action: #selector(refreshCollectionView(refresh:)), for: .valueChanged)
+        refresh.backgroundColor = UIColor.red
+        refresh.attributedTitle = NSAttributedString(string: "Loading...")
+        self.collectionView.refreshControl = refresh
+    }
+    
+    @objc func refreshCollectionView(refresh: UIRefreshControl) {
+        loadPhotos()
+        refresh.endRefreshing()
     }
 }
