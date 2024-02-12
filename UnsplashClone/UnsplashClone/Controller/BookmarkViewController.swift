@@ -18,7 +18,7 @@ final class BookmarkViewController: UIViewController, UICollectionViewDelegate {
     
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Int, DetailElement>?
-    var delegate: BookmarkProtocol?
+    var delegate: BookmarkDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()

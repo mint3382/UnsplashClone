@@ -183,7 +183,7 @@ extension MainViewController {
     }
 }
 
-extension MainViewController: BookmarkProtocol {
+extension MainViewController: BookmarkDelegate {
     func updateConfiguration() {
         bookmarkController?.bookmarks = PhotoService.shared.fetchData()
         
