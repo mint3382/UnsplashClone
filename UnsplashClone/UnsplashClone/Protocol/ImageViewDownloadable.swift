@@ -7,47 +7,21 @@
 
 import UIKit
 
-protocol ImageViewDownloadable {
-    var imageView: UIImageView { get set }
-}
+protocol ImageViewDownloadable { }
 
 extension ImageViewDownloadable {
-    func downloadImage(url: URL) {
-        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error as NSError? {
-                print(error.localizedDescription)
-                self.imageView.image = UIImage(named: "noImage")
-                return
-            }
-            
-            guard let data,
-                  let image = UIImage(data: data) else {
-                self.imageView.image = UIImage(named: "noImage")
-                print("download error: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            Task { @MainActor in
-                self.imageView.image = image
-            }
+    func downloadImage(url: URL) async throws -> UIImage {
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw NetworkError.invalidURL
         }
-        dataTask.resume()
-    }
-    
-    func downloadImageToGallery(url: URL) {
-        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error as NSError? {
-                print(error.localizedDescription)
-                return
-            }
-            
-            guard let data,
-                  let image = UIImage(data: data) else {
-                print("download error: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-            print("다운로드 완료")
+        
+        guard let image = UIImage(data: data) else {
+            throw NetworkError.noData
         }
-        dataTask.resume()
+        
+        return image
     }
 }

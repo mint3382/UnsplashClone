@@ -9,7 +9,7 @@ import UIKit
 
 class PhotoCell: UICollectionViewCell, Identifiable, ImageViewDownloadable {
     static let id = "PhotoCell"
-    var imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
@@ -36,7 +36,14 @@ class PhotoCell: UICollectionViewCell, Identifiable, ImageViewDownloadable {
     }
     
     func configureImage(title: String, url: URL) {
-        downloadImage(url: url)
+        Task {
+            do {
+                let image = try await downloadImage(url: url)
+                imageView.image = image
+            } catch {
+                imageView.image = UIImage(named: "noImage")
+            }
+        }
         titleLabel.text = title
         configureImageUI()
     }

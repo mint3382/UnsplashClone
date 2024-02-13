@@ -11,7 +11,7 @@ final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
     private var photoItems: [PhotoElement] = []
     private var currentPage: Int?
     
-    var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -152,9 +152,16 @@ final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         }
         
         let item = photoItems[currentPage]
-        
         let url = item.urls.regular
-        downloadImage(url: url)
+        
+        Task {
+            do {
+                let image = try await downloadImage(url: url)
+                imageView.image = image
+            } catch {
+                imageView.image = UIImage(named: "noImage")
+            }
+        }
     }
     
     private func configureBackView() {

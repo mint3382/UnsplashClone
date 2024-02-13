@@ -12,7 +12,7 @@ final class DetailViewController: UIViewController, ImageViewDownloadable {
     static let identifier = "DetailViewController"
     var delegate: DetailDelegate?
     private var element: DetailElement
-    private var image: UIImage?
+    private var image: UIImage
     
     private let totalStackView: UIStackView = {
         let stackView = UIStackView()
@@ -121,7 +121,7 @@ final class DetailViewController: UIViewController, ImageViewDownloadable {
     }
     
     @objc private func tappedDownloadButton() {
-        self.downloadImageToGallery(url: URL(string: element.urls)!)
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
     
     init(item: DetailElement, image: UIImage) {
@@ -139,7 +139,7 @@ final class DetailViewController: UIViewController, ImageViewDownloadable {
         
         view.backgroundColor = UIColor(white: 0, alpha: 0.85)
         view.isOpaque = false
-        self.imageView.image = image!.resize(targetSize: CGSize(
+        self.imageView.image = image.resize(targetSize: CGSize(
             width: view.frame.width,
             height: ((Double(element.height) / Double(element.width))) * view.frame.width
         ))
