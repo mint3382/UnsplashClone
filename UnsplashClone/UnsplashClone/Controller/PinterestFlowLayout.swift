@@ -8,20 +8,22 @@
 import UIKit
 
 final class PinterestFlowLayout: UICollectionViewFlowLayout {
+    //열의 개수
     private var numberOfColumns = 2
+    //간격
     private var cellPadding: CGFloat = 4
     
-    private var headerCache = [UICollectionViewLayoutAttributes]()
-    private var cache = [UICollectionViewLayoutAttributes]()
+    private var headerAttributes = [UICollectionViewLayoutAttributes]()
+    private var itemAttributes = [UICollectionViewLayoutAttributes]()
     private var sectionItemAttributes = [[UICollectionViewLayoutAttributes]]()
     private var allItemAttributes = [UICollectionViewLayoutAttributes]()
     
     //content Size를 저장하기 위한 속성들.
     //contentHeight: 사진이 추가되면 증가
-    //contentWidth: collectionView의 넓이와 자체 contentInset 기반으로 계산
     var contentHeight: CGFloat = 0
+    //contentWidth: collectionView의 넓이와 자체 contentInset 기반으로 계산
     var contentWidth: CGFloat {
-        guard let collectionView = collectionView else {
+        guard let collectionView else {
             return 0
         }
         let insets = collectionView.contentInset
@@ -48,7 +50,7 @@ final class PinterestFlowLayout: UICollectionViewFlowLayout {
         let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: NSIndexPath(item: 0, section: 0) as IndexPath)
         attributes.frame = CGRect(x: headerInset.left, y: top, width: collectionView.frame.size.width - (headerInset.left + headerInset.right), height: CGFloat(headerHeight))
         
-        headerCache.append(attributes)
+        headerAttributes.append(attributes)
         allItemAttributes.append(attributes)
         
         top = attributes.frame.maxY + headerInset.bottom
@@ -82,23 +84,23 @@ final class PinterestFlowLayout: UICollectionViewFlowLayout {
             //인스턴스 생성, frame 사용하여 자체 프레임 설정, 캐시에 추가
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             attributes.frame = insetFrame
-            cache.append(attributes)
+            itemAttributes.append(attributes)
             allItemAttributes.append(attributes)
             
             //새로 계산된 항목의 프레임을 확장
-            contentHeight = max(contentHeight, frame.maxY)
+//            contentHeight = max(contentHeight, frame.maxY)
+            contentHeight = frame.maxY
             yOffset[column] = yOffset[column] + height
             
             //다음 항목이 다음 열에 배치되도록
             column = yOffset[0] > yOffset[1] ? 1 : 0
         }
         
-        sectionItemAttributes.append(cache)
+        sectionItemAttributes.append(itemAttributes)
     }
     
 //    모든 셀과 보충 뷰의 레이아웃 정보 리턴
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-      
       var visibleLayoutAttributes = [UICollectionViewLayoutAttributes]()
       
       for attributes in allItemAttributes {
@@ -111,10 +113,11 @@ final class PinterestFlowLayout: UICollectionViewFlowLayout {
     
     //모든 셀의 레이아웃 정보 리턴
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return sectionItemAttributes[indexPath.section][indexPath.item]
+//        return sectionItemAttributes[indexPath.section][indexPath.item]
+        return itemAttributes[indexPath.item]
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return headerCache[indexPath.section]
+        return headerAttributes[indexPath.section]
     }
 }
