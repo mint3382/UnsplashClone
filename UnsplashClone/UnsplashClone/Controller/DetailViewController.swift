@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-final class DetailViewController: UIViewController, ImageViewDownloadable {
+final class DetailViewController: UIViewController {
     static let identifier = "DetailViewController"
     var delegate: DetailDelegate?
     private var element: DetailElement
@@ -35,8 +35,8 @@ final class DetailViewController: UIViewController, ImageViewDownloadable {
     private let barStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 8
+        stackView.distribution = .fill
+        stackView.spacing = 12
         
         return stackView
     }()
@@ -54,7 +54,8 @@ final class DetailViewController: UIViewController, ImageViewDownloadable {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textColor = .white
-        
+        label.setContentHuggingPriority(.init(1), for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         
         return label
     }()
@@ -90,7 +91,7 @@ final class DetailViewController: UIViewController, ImageViewDownloadable {
         let image = UIImage(named: "bookmark")?.resize(targetSize: CGSize(width: 30, height: 30))
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(tappedBookmarkButton), for: .touchUpInside)
-        
+
         return button
     }()
     

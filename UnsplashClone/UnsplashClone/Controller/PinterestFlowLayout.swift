@@ -88,8 +88,7 @@ final class PinterestFlowLayout: UICollectionViewFlowLayout {
             allItemAttributes.append(attributes)
             
             //새로 계산된 항목의 프레임을 확장
-//            contentHeight = max(contentHeight, frame.maxY)
-            contentHeight = frame.maxY
+            contentHeight = max(contentHeight, frame.maxY)
             yOffset[column] = yOffset[column] + height
             
             //다음 항목이 다음 열에 배치되도록
