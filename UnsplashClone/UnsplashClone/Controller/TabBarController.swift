@@ -14,12 +14,13 @@ final class TabBarController: UITabBarController {
         self.tabBar.unselectedItemTintColor = .systemGray
         UITabBar.appearance().backgroundColor = .black
         UITabBar.appearance().barTintColor = .black
+        navigationItem.titleView = UIImageView(image: UIImage(named: "logo"))
         setUpViewControllers()
     }
     
     private func setUpViewControllers() {
-        let main = UINavigationController(rootViewController: MainViewController())
-        let randomPhoto = UINavigationController(rootViewController: RandomPhotoViewController())
+        let main = MainViewController()
+        let randomPhoto = RandomPhotoViewController()
         
         main.tabBarItem.image = UIImage(named: "house")
         randomPhoto.tabBarItem.image = UIImage(named: "cards")
