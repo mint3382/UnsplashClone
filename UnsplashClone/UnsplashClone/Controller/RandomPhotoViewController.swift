@@ -7,7 +7,8 @@
 
 import UIKit
 
-final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
+final class RandomPhotoViewController: UIViewController, UIImageDownloadable {
+    let apiProvider: APIProvider = APIProvider()
     private var photoItems: [PhotoElement] = []
     private var currentPage: Int?
     
@@ -83,7 +84,7 @@ final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navigationItem.titleView = UIImageView(image: UIImage(named: "logo"))
+
         Task {
             await loadPhotos()
             configureImage()
@@ -196,7 +197,7 @@ final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         
         NSLayoutConstraint.activate([
             imageView.centerYAnchor.constraint(equalTo: imageBackView.centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: imageView.intrinsicContentSize.width),
+            imageView.widthAnchor.constraint(equalTo: imageBackView.widthAnchor),
             imageView.topAnchor.constraint(equalTo: imageBackView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: imageBackView.bottomAnchor)
         ])
@@ -218,14 +219,13 @@ final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
     
     private func loadPhotos() async {
         let endPoint = EndPoint(queries: nil)
-        let apiProvider = APIProvider()
-        guard let request = endPoint.configureRequest() else {
+        guard let url = endPoint.url else {
             //TODO: 실패 알럿
             return
         }
         
         do {
-            let photo = try await apiProvider.fetchData(decodingType: Photo.self, request: request)
+            let photo = try await apiProvider.fetchDecodedData(type: Photo.self, from: url)
             photo.forEach { photoElement in
                 photoItems.append(photoElement)
             }

@@ -8,10 +8,11 @@
 import UIKit
 import CoreData
 
-final class MainViewController: UIViewController, UICollectionViewDelegate {
-    private var photoItems: [PhotoElement] = []
-    {
+final class MainViewController: UIViewController, UICollectionViewDelegate, UIImageDownloadable {
+    let apiProvider: APIProvider = APIProvider()
+    private var photoItems: [PhotoElement] = [] {
         didSet {
+            collectionView.setCollectionViewLayout(PinterestFlowLayout(), animated: true)
             setSnapShot()
         }
     }
@@ -24,7 +25,6 @@ final class MainViewController: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.titleView = UIImageView(image: UIImage(named: "logo"))
         view.backgroundColor = .systemBackground
         
         loadPhotos()
@@ -112,11 +112,20 @@ extension MainViewController {
     
 //    데이터소스 세팅
     private func setDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Int, PhotoElement>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<Int, PhotoElement>(collectionView: collectionView, cellProvider: { [self] collectionView, indexPath, itemIdentifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.id, for: indexPath) as? PhotoCell else {
                 return UICollectionViewCell()
             }
-            cell.configureImage(title: itemIdentifier.title, url: itemIdentifier.urls.small)
+            var image: UIImage?
+            Task {
+                do {
+                    image = try await downloadImage(url: itemIdentifier.urls.small)
+                } catch {
+                    image = UIImage(named: "noImage")
+                }
+                cell.configureImage(title: itemIdentifier.title, image: image)
+            }
+            
             return cell
         })
         dataSource?.supplementaryViewProvider = { view, kind, indexPath in
@@ -165,15 +174,14 @@ extension MainViewController {
 extension MainViewController {
     private func loadPhotos() {
         let endPoint = EndPoint(queries: nil)
-        let apiProvider = APIProvider()
-        guard let request = endPoint.configureRequest() else {
+        guard let url = endPoint.url else {
             //TODO: 실패 알럿
             return
         }
         
         Task {
             do {
-                let photo = try await apiProvider.fetchData(decodingType: Photo.self, request: request)
+                let photo = try await apiProvider.fetchDecodedData(type: Photo.self, from: url)
                 photoItems = photo
             } catch {
                 //TODO: 실패 알럿

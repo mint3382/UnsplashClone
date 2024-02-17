@@ -8,7 +8,9 @@
 import UIKit
 import CoreData
 
-final class BookmarkViewController: UIViewController, UICollectionViewDelegate {
+final class BookmarkViewController: UIViewController, UICollectionViewDelegate, UIImageDownloadable {
+    let apiProvider: APIProvider = APIProvider()
+    
     var bookmarks: [DetailElement] = PhotoService.shared.fetchData()
     {
         didSet {
@@ -91,14 +93,25 @@ final class BookmarkViewController: UIViewController, UICollectionViewDelegate {
         dataSource = UICollectionViewDiffableDataSource<Int, DetailElement>(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, itemIdentifier in
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PhotoCell.id,
-                for: indexPath) as? PhotoCell else {
-                return UICollectionViewCell()
-            }
-                cell.configureImage(title: itemIdentifier.title, url: URL(string: itemIdentifier.urls)!)
-            
-            return cell
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: PhotoCell.id,
+                    for: indexPath) as? PhotoCell else {
+                    return UICollectionViewCell()
+                }
+                var image: UIImage?
+                guard let url = URL(string: itemIdentifier.urls) else {
+                    return cell
+                }
+                Task {
+                    do {
+                        image = try await self.downloadImage(url: url)
+                    } catch {
+                        image = UIImage(named: "noImage")
+                    }
+                    cell.configureImage(title: itemIdentifier.title, image: image)
+                }
+                
+                return cell
         })
         
         let headerRegistration = UICollectionView.SupplementaryRegistration<HeaderView>(elementKind: UICollectionView.elementKindSectionHeader) {

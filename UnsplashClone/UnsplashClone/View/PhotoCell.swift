@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhotoCell: UICollectionViewCell, Identifiable, ImageViewDownloadable {
+class PhotoCell: UICollectionViewCell, Identifiable {
     static let id = "PhotoCell"
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -29,22 +29,16 @@ class PhotoCell: UICollectionViewCell, Identifiable, ImageViewDownloadable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        clipsToBounds = true
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureImage(title: String, url: URL) {
-        Task {
-            do {
-                let image = try await downloadImage(url: url)
-                imageView.image = image
-            } catch {
-                imageView.image = UIImage(named: "noImage")
-            }
-        }
+    func configureImage(title: String, image: UIImage?) {
         titleLabel.text = title
+        imageView.image = image
         configureImageUI()
     }
     
