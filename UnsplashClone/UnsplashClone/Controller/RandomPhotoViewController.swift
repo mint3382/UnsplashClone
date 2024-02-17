@@ -13,7 +13,7 @@ final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .center
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -157,7 +157,10 @@ final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         Task {
             do {
                 let image = try await downloadImage(url: url)
-                imageView.image = image
+                imageView.image = image.resize(targetSize: CGSize(
+                    width: imageBackView.frame.width,
+                    height: ((Double(item.height) / Double(item.width))) * view.frame.width
+                ))
             } catch {
                 imageView.image = UIImage(named: "noImage")
             }
@@ -192,10 +195,10 @@ final class RandomPhotoViewController: UIViewController, ImageViewDownloadable {
         ])
         
         NSLayoutConstraint.activate([
+            imageView.centerYAnchor.constraint(equalTo: imageBackView.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: imageView.intrinsicContentSize.width),
             imageView.topAnchor.constraint(equalTo: imageBackView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: imageBackView.bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: imageBackView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: imageBackView.trailingAnchor)
+            imageView.bottomAnchor.constraint(equalTo: imageBackView.bottomAnchor)
         ])
     }
     
