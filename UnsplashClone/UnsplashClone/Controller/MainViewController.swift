@@ -167,6 +167,7 @@ extension MainViewController {
             user: item.user)
         detailViewController = DetailViewController(item: detailItem, image: image)
         detailViewController.delegate = bookmarkController
+        detailViewController.modalPresentationStyle = .overFullScreen
         self.present(detailViewController, animated: true)
     }
 }

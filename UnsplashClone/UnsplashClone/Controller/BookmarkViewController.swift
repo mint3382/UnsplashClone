@@ -30,6 +30,7 @@ final class BookmarkViewController: UIViewController, UICollectionViewDelegate, 
         configureCollectionViewUI()
         setDataSource()
         setSnapshot()
+        self.definesPresentationContext = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,6 +146,7 @@ final class BookmarkViewController: UIViewController, UICollectionViewDelegate, 
        
         detailViewController = DetailViewController(item: item, image: image)
         detailViewController.delegate = self
+        detailViewController.modalPresentationStyle = .overFullScreen
         self.present(detailViewController, animated: true)
     }
 }
